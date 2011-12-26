@@ -1,0 +1,32 @@
+package cz.fi.muni.jhuska.bc.api;
+
+public interface Calendar extends Component {
+
+	int getYear();
+
+	int gentMonth();
+
+	int getDay();
+	
+	int getWeek();
+
+	int nextDay();
+
+	int nextMonth();
+
+	int nextYear();
+
+	int previousYear();
+
+	int previousDay();
+
+	int previousMonth();
+
+	void setDay(int day);
+
+	void setMonth(int month);
+
+	void setYear(int year);
+
+	int getNumberOfDays();
+}
