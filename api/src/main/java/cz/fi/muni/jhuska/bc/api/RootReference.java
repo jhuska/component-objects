@@ -1,6 +1,7 @@
 package cz.fi.muni.jhuska.bc.api;
 
 public class RootReference {
+	
 	private WebElement root;
 	
 	public WebElement get() {

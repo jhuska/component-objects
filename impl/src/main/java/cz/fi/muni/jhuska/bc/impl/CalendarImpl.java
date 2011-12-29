@@ -25,11 +25,6 @@ public class CalendarImpl extends AbstractComponent implements Calendar {
 	
 	@ReferencedBy(clazz="rf-cal-week")
 	private WebElement weekLocator;
-	
-	@Override
-	public void setRoot(WebElement root) {
-		 this.root = root;
-	}
 
 	public WebElement getDayLocator() {
 		return dayLocator;
@@ -61,11 +56,6 @@ public class CalendarImpl extends AbstractComponent implements Calendar {
 
 	public void setWeekLocator(WebElement weekLocator) {
 		this.weekLocator = weekLocator;
-	}
-
-	@Override
-	public WebElement getRoot() {
-		return root;	
 	}
 
 	@Override
