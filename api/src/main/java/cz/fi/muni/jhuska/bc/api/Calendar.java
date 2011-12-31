@@ -3,9 +3,13 @@ package cz.fi.muni.jhuska.bc.api;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 public interface Calendar extends Component {
 
 	Date getDate();
+	
+	DateTime getDateTime();
 	
 	// TODO support for JODA time
 

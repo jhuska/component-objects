@@ -13,15 +13,23 @@
         <module>ftest</module>
     </modules>
 
+    <properties>
+        <testng.version>5.14.6</testng.version>
+        <jodatime.version>2.0</jodatime.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
-
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>5.14.6</version>
+                <version>${testng.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${jodatime.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

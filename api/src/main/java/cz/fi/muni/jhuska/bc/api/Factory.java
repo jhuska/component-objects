@@ -25,7 +25,6 @@ public class Factory {
 		
 		// TODO initialize root
 		RootReference rootReference = component.getRootReference();
-		WebElement root;
 		
 		// TODO initialize other elements
 		for(Field i : declaredFields) {
@@ -33,10 +32,6 @@ public class Factory {
 			Annotation[] annotations = i.getAnnotations();
 			for(Annotation j : annotations) {
 
-				if( j instanceof Root ) {
-					
-				}
-				
 				if( j instanceof ReferencedBy ) {
 					
 					String referenceBy = ((ReferencedBy) j).clazz();

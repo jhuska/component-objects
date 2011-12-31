@@ -2,6 +2,7 @@ package cz.fi.muni.jhuska.bc.impl;
 
 import java.util.Date;
 import java.util.List;
+import org.joda.time.DateTime;
 
 import cz.fi.muni.jhuska.bc.annotations.ReferencedBy;
 import cz.fi.muni.jhuska.bc.annotations.Root;
@@ -84,6 +85,12 @@ public class CalendarImpl extends AbstractComponent implements Calendar {
 
 	@Override
 	public List<CalendarDay> getDays() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DateTime getDateTime() {
 		// TODO Auto-generated method stub
 		return null;
 	}
