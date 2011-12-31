@@ -2,6 +2,7 @@ package cz.fi.muni.jhuska.bc.impl;
 
 import java.util.Date;
 import java.util.List;
+
 import org.joda.time.DateTime;
 
 import cz.fi.muni.jhuska.bc.annotations.ReferencedBy;
@@ -26,6 +27,168 @@ public class CalendarImpl extends AbstractComponent implements Calendar {
 	
 	@ReferencedBy(clazz="rf-cal-week")
 	private WebElement weekLocator;
+
+	@Override
+	public void showCalendar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Date getDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DateTime getDateTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void gotoDate(Date date) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void gotoDate(Date date, CalendarScrollingType type) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void gotoDateTime(DateTime dateTime) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void gotoDateTime(DateTime dateTime, CalendarScrollingType type) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public CalendarDay gotoNextDay() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarWeek gotoNextWeek() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarMonth gotoNextMonth() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarYear gotoNextYear() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarDay gotoPreviousDay() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarWeek gotoPreviousWeek() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarMonth gotoPreviousMonth() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarYear gotoPreviousYear() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarDay getDay() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarDay getDay(int day) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CalendarDay> getDays() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarWeek getWeek() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarWeek getWeek(int week) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CalendarWeek> getWeeks() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarMonth getMonth() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarMonth getMonth(int month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CalendarMonth> getMonths() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarYear getYear() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarYear getYear(int year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CalendarYear> getYears(int from, int to) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public WebElement getDayLocator() {
 		return dayLocator;
@@ -59,42 +222,5 @@ public class CalendarImpl extends AbstractComponent implements Calendar {
 		this.weekLocator = weekLocator;
 	}
 
-	@Override
-	public Date getDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void gotoDate(Date date) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void gotoDate(Date date, CalendarScrollingType type) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public CalendarDay getDay() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<CalendarDay> getDays() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DateTime getDateTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 
 }
