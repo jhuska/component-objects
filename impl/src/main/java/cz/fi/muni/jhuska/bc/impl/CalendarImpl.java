@@ -15,23 +15,28 @@ public class CalendarImpl extends AbstractComponent implements Calendar {
 
 	@Root
 	private WebElement root;
-	
-	@ReferencedBy(clazz="rf-cal-c")
+
+	@ReferencedBy(clazz = "rf-cal-c")
 	private WebElement dayLocator;
-	
-	@ReferencedBy(clazz="rf-cal-tl-btn[onclick*='showDateEditor']")
+
+	@ReferencedBy(clazz = "rf-cal-tl-btn[onclick*='showDateEditor']")
 	private WebElement monthLocator;
-	
-	@ReferencedBy(clazz="rf-cal-tl-btn[onclick*='showDateEditor']")
+
+	@ReferencedBy(clazz = "rf-cal-tl-btn[onclick*='showDateEditor']")
 	private WebElement yearLocator;
-	
-	@ReferencedBy(clazz="rf-cal-week")
+
+	@ReferencedBy(clazz = "rf-cal-week")
 	private WebElement weekLocator;
+
+	private WebElement proxy = (WebElement) java.lang.reflect.Proxy
+			.newProxyInstance(WebElement.class.getClassLoader(),
+					new Class[] { WebElement.class }, new MyProxy(
+							new WebElementImpl()));
 
 	@Override
 	public void showCalendar() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -49,25 +54,25 @@ public class CalendarImpl extends AbstractComponent implements Calendar {
 	@Override
 	public void gotoDate(Date date) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void gotoDate(Date date, CalendarScrollingType type) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void gotoDateTime(DateTime dateTime) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void gotoDateTime(DateTime dateTime, CalendarScrollingType type) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -221,6 +226,5 @@ public class CalendarImpl extends AbstractComponent implements Calendar {
 	public void setWeekLocator(WebElement weekLocator) {
 		this.weekLocator = weekLocator;
 	}
-
 
 }
