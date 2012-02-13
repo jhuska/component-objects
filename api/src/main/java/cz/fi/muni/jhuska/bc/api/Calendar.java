@@ -66,7 +66,7 @@ public interface Calendar extends Component {
 	List<CalendarYear> getYears(int from, int to);
 
 	public interface TimeUnit {
-		int getValue();
+		int toInt();
 	}
 
 	public interface CalendarDay extends TimeUnit {

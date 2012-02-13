@@ -1,0 +1,89 @@
+package cz.fi.muni.jhuska.bc.test;
+
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
+
+import org.mockito.Mockito;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import cz.fi.muni.jhuska.bc.api.AbstractComponent;
+import cz.fi.muni.jhuska.bc.api.Factory;
+
+public class TestFactoryClass {
+
+    private AbstractComponent abstrComponent;
+
+    private final String ROOT_METHOD_RETURN_VAL = "root";
+    private final String REF_BY_CLASS_METHOD_RETURN_VAL = "refByClassName";
+
+    @BeforeMethod
+    public void initializeMocks() {
+        abstrComponent = Factory.initializeComponent(AbstractComponentMock.class);
+    }
+
+    @Test
+    public void testInitializedComponentNotNull() {
+        assertNotNull(abstrComponent, "The initialized component can not be null!");
+    }
+
+    @Test
+    public void testIsRootInitialized() {
+        assertNotNull(((AbstractComponentMock) abstrComponent).getRootProxy(), "Root should be initialized!");
+    }
+
+    @Test
+    public void testSettingRoot() {
+        WebElement root = setRoot();
+        WebElement root2 = abstrComponent.getRoot();
+        assertTrue(root == root2, "Got root should be the same object as set root!");
+        assertEquals(root2.getText(), ROOT_METHOD_RETURN_VAL, "Mothod invoked on got root has different return value!");
+    }
+
+    @Test
+    public void testMethodInvocationOnRoot() {
+        try {
+            ((AbstractComponentMock) abstrComponent).invokeMethodOnRoot();
+            fail("The runtime exception should be thrown, since root is not set and you are invoking a method on it!");
+        } catch (RuntimeException ex) {
+            // expected
+        }
+
+        setRoot();
+        assertEquals(((AbstractComponentMock) abstrComponent).invokeMethodOnRoot(), ROOT_METHOD_RETURN_VAL,
+            "The return value of method invoked on root element is wrong!");
+    }
+
+    @Test
+    public void testMethodInvocationOnReferencedElement() {
+        try {
+            ((AbstractComponentMock) abstrComponent).invokeMethodOnElementRefByClass();
+            fail("The RuntimeException should be thrown, since you have invoked method on element which referenced from root, and you have not set the root!");
+        } catch (RuntimeException ex) {
+            // OK
+        }
+        WebElement root = setRoot();
+        WebElement elemByClass = Mockito.mock(WebElement.class);
+        when(elemByClass.getText()).thenReturn(REF_BY_CLASS_METHOD_RETURN_VAL);
+        when(root.findElement(By.className(anyString()))).thenReturn(elemByClass);
+
+        assertEquals(((AbstractComponentMock) abstrComponent).invokeMethodOnElementRefByClass(),
+            REF_BY_CLASS_METHOD_RETURN_VAL, "The method onvoked on referenced element returned wrong value!");
+    }
+
+    private WebElement setRoot() {
+        WebElement root = Mockito.mock(WebElement.class);
+        when(root.getText()).thenReturn(ROOT_METHOD_RETURN_VAL);
+
+        abstrComponent.setRoot(root);
+        return root;
+    }
+
+}

@@ -6,7 +6,7 @@
         <artifactId>bachelor-thesis-parent</artifactId>
         <groupId>cz.jhuska.bachelor.thesis</groupId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>bachelor-thesis-ftest</artifactId>
@@ -24,6 +24,16 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.8.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium</artifactId>
+            <type>pom</type>
+        </dependency>
     </dependencies>
-
 </project>

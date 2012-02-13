@@ -10,4 +10,18 @@ import java.lang.annotation.Target;
 public @interface ReferencedBy {
 	
 	String clazz() default "";
+	
+	String css() default "";
+	
+	String id() default "";
+	
+	String linkText() default "";
+	
+	String name() default "";
+	
+	String partialLinkText() default "";
+	
+	String tagName() default "";
+	
+	String xPath() default "";
 }

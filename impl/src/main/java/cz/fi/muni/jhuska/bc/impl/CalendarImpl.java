@@ -27,11 +27,10 @@ public class CalendarImpl extends AbstractComponent implements Calendar {
 
 	@ReferencedBy(clazz = "rf-cal-week")
 	private WebElement weekLocator;
-
-	private WebElement proxy = (WebElement) java.lang.reflect.Proxy
-			.newProxyInstance(WebElement.class.getClassLoader(),
-					new Class[] { WebElement.class }, new MyProxy(
-							new WebElementImpl()));
+	
+	public WebElement getProxiedRoot() {
+		return root;
+	}
 
 	@Override
 	public void showCalendar() {
