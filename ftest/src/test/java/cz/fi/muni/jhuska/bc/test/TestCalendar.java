@@ -1,83 +1,65 @@
 package cz.fi.muni.jhuska.bc.test;
 
-import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import java.io.File;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.testng.Arquillian;
+import org.jboss.shrinkwrap.api.ArchivePaths;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import cz.fi.muni.jhuska.bc.api.Calendar;
 import cz.fi.muni.jhuska.bc.api.Factory;
 import cz.fi.muni.jhuska.bc.impl.CalendarImpl;
 
-public class TestCalendar {
-	
-	@BeforeTest
-	public void initializeMocks() {
-		MockitoAnnotations.initMocks(this);
-	}
+public class TestCalendar extends Arquillian {
 
-	@Test
-	public void testCalendarInit() {
+    private Calendar calendar;
+    private WebElement calendarRoot;
+    private WebDriver webDriver;
 
-		CalendarImpl calendar = (CalendarImpl) Factory
-				.initializeComponent(CalendarImpl.class);
+    @Deployment(testable=false)
+    public static WebArchive createDeployment() {
+//        WebArchive war = ShrinkWrap
+//            .create(WebArchive.class, "ftest-app.war")
+//            .addAsWebInfResource(new File("src/test/webapp/WEB-INF/web.xml"))
+//            .addAsWebResource(new File("src/test/webapp/components/calendar.xhtml"))
+//            .addAsWebResource(new File("src/test/webapp/resources/script/jquery-min.js"),
+//                ArchivePaths.create("resources/script/jquery-min.js"));
+            
+        WebArchive war = ShrinkWrap.createFromZipFile( WebArchive.class, new File("target/showcase.war") );
+        return war;
+    }
 
-		assertNotNull(calendar, "The calendar should be initialized!");
-		assertNotNull(calendar.getYearLocator(),
-				"The year locator should be initialized!");
-		assertNotNull(calendar.getDayLocator(),
-				"The day locator should be initialized!");
-		assertNotNull(calendar.getMonthLocator(),
-				"The month locator should be initialized!");
-		assertNotNull(calendar.getWeekLocator(),
-				"The week locator should be initialized!");
-	}
+    @BeforeClass
+    public void initCalendar() {
+        calendar = Factory.initializeComponent(CalendarImpl.class);
 
-	@Test
-	public void testRootSetting() {
+        webDriver = new FirefoxDriver();
+    }
 
-		CalendarImpl calendar = (CalendarImpl) Factory
-				.initializeComponent(CalendarImpl.class);
-		
-		WebElement root = Mockito.mock(WebElement.class);
-		
-		String sampleText = "test";
-		Mockito.when(root.getText()).thenReturn(sampleText);
-		
-		calendar.setRoot(root);
-		
-		Assert.assertEquals(calendar.getRoot(), root);
-		
-		Assert.assertSame(calendar.getProxiedRoot().getText(), sampleText);
-		
-		
-		
-		
+    @BeforeMethod
+    public void loadTestPage() {
+        webDriver.get("http://localhost:8080/showcase/richfaces/component-sample.jsf?demo=calendar&skin=blueSky");
+        
+        calendarRoot = webDriver.findElement(By.xpath("//td[@class='ecol1']"));
+        calendar.setRoot(calendarRoot);
+    }
 
-//		String actualDayLocator = calendar.getDayLocator().getLocator();
-//		String expectedDayLocator = "foo-bar rf-cal-c";
-//		assertEquals(actualDayLocator, expectedDayLocator,
-//				"The day locator is not correct!");
-//
-//		WebElementImpl anotherRoot = new WebElementImpl();
-//		anotherRoot.setReference("bar-foo");
-//
-//		calendar.setRoot(anotherRoot);
-//
-//		actualDayLocator = calendar.getDayLocator().getLocator();
-//		expectedDayLocator = "bar-foo rf-cal-c";
-//		assertEquals(actualDayLocator, expectedDayLocator,
-//				"The day locator is not correct!");
-//
-//		anotherRoot.setReference("changed-reference-on-root-element");
-//		
-//		expectedDayLocator = "changed-reference-on-root-element rf-cal-c";
-//		actualDayLocator = calendar.getDayLocator().getLocator();
-//		assertEquals(actualDayLocator, expectedDayLocator,
-//				"The day locator is not correct!");
+    @Test
+    public void testShowCalendar() {
+        calendar.showCalendar();
 
-	}
+        WebElement popup = webDriver.findElement(By.xpath("/html/body/div/div[2]/div[2]/fieldset/form/table/tbody/tr/td/div/span/table/tbody/tr/td/table/tbody/tr/td[3]/div"));
+        assertTrue(popup.isDisplayed(), "The popup of the calendar should be displayed!");
+    }
 }

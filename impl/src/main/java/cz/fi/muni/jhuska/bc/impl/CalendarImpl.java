@@ -4,12 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.openqa.selenium.WebElement;
 
 import cz.fi.muni.jhuska.bc.annotations.ReferencedBy;
 import cz.fi.muni.jhuska.bc.annotations.Root;
 import cz.fi.muni.jhuska.bc.api.AbstractComponent;
 import cz.fi.muni.jhuska.bc.api.Calendar;
-import cz.fi.muni.jhuska.bc.api.WebElement;
 
 public class CalendarImpl extends AbstractComponent implements Calendar {
 
@@ -28,14 +28,16 @@ public class CalendarImpl extends AbstractComponent implements Calendar {
 	@ReferencedBy(clazz = "rf-cal-week")
 	private WebElement weekLocator;
 	
+	@ReferencedBy(xPath="//*[@id=\"j_idt103:calendarPopupButton\"]")
+	private WebElement showCalendarButton;
+	
 	public WebElement getProxiedRoot() {
 		return root;
 	}
 
 	@Override
 	public void showCalendar() {
-		// TODO Auto-generated method stub
-
+	    showCalendarButton.click();
 	}
 
 	@Override
@@ -225,5 +227,19 @@ public class CalendarImpl extends AbstractComponent implements Calendar {
 	public void setWeekLocator(WebElement weekLocator) {
 		this.weekLocator = weekLocator;
 	}
+
+    /**
+     * @return the showCalendarButton
+     */
+    public WebElement getShowCalendarButton() {
+        return showCalendarButton;
+    }
+
+    /**
+     * @param showCalendarButton the showCalendarButton to set
+     */
+    public void setShowCalendarButton(WebElement showCalendarButton) {
+        this.showCalendarButton = showCalendarButton;
+    }
 
 }
