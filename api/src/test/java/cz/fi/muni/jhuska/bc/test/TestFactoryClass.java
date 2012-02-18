@@ -9,6 +9,8 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
@@ -73,6 +75,12 @@ public class TestFactoryClass {
         WebElement elemByClass = Mockito.mock(WebElement.class);
         when(elemByClass.getText()).thenReturn(REF_BY_CLASS_METHOD_RETURN_VAL);
         when(root.findElement(By.className(anyString()))).thenReturn(elemByClass);
+//        when(root.findElement(Mockito.any(By.class))).thenAnswer(new Answer<WebElement>() {
+//            @Override
+//            public WebElement answer(InvocationOnMock invocation) throws Throwable {
+//                invocation.getArguments()[1];
+//            }
+//        })
 
         assertEquals(((AbstractComponentMock) abstrComponent).invokeMethodOnElementRefByClass(),
             REF_BY_CLASS_METHOD_RETURN_VAL, "The method onvoked on referenced element returned wrong value!");

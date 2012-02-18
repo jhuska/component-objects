@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import cz.fi.muni.jhuska.bc.annotations.ReferencedBy;
@@ -27,8 +28,8 @@ public class CalendarImpl extends AbstractComponent implements Calendar {
 
 	@ReferencedBy(clazz = "rf-cal-week")
 	private WebElement weekLocator;
-	
-	@ReferencedBy(xPath="//*[@id=\"j_idt103:calendarPopupButton\"]")
+
+	@ReferencedBy(xPath="//*[contains(@id, 'calendarPopupButton')]")
 	private WebElement showCalendarButton;
 	
 	public WebElement getProxiedRoot() {
