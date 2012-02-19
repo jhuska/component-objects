@@ -1,4 +1,4 @@
-package cz.fi.muni.jhuska.bc.test;
+package cz.fi.muni.jhuska.bc.unit.test;
 
 public enum ReferencedByEnum {
     CLASS_NAME,

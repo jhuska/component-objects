@@ -1,4 +1,4 @@
-package cz.fi.muni.jhuska.bc.test;
+package cz.fi.muni.jhuska.bc.ftest.referenced;
 
 import org.openqa.selenium.WebElement;
 
@@ -20,7 +20,7 @@ public class AbstractComponentMock extends AbstractComponent {
     @ReferencedBy(id = "idRef")
     private WebElement locatorRefById;
 
-    @ReferencedBy(tagName = "tagNameRef")
+    @ReferencedBy(tagName = "img")
     private WebElement locatorRefByTagName;
 
     @ReferencedBy(linkText = "linkTextRef")
@@ -29,10 +29,10 @@ public class AbstractComponentMock extends AbstractComponent {
     @ReferencedBy(partialLinkText = "partiaLinkTextRef")
     private WebElement locatorRefByPartialLinkText;
 
-    @ReferencedBy(xPath = "xpathRef")
+    @ReferencedBy(xPath = "//*[contains(@id,'xpathRef')]")
     private WebElement locatorRefByXPath;
 
-    @ReferencedBy(css = "cssSelectorRef")
+    @ReferencedBy(css = "#cssRef")
     private WebElement locatorRefByCssSelector;
 
     public String invokeMethodOnRoot() {
@@ -41,6 +41,34 @@ public class AbstractComponentMock extends AbstractComponent {
 
     public String invokeMethodOnElementRefByClass() {
         return this.locatorRefByClassName.getText();
+    }
+    
+    public String invokeMethodOnElementRefById() {
+        return this.locatorRefById.getText();
+    }
+    
+    public String invokeMethodOnElementRefByCSS() {
+        return this.locatorRefByCssSelector.getText();
+    }
+    
+    public String invokeMethodOnElementRefByName() {
+        return this.locatorRefByName.getText();
+    }
+    
+    public String invokeMethodOnElementRefByTagName() {
+        return locatorRefByTagName.getAttribute("id");
+    }
+    
+    public String invokeMethodOnElementRefByXpath() {
+        return this.locatorRefByXPath.getText();
+    }
+    
+    public String invokeMethodOnElementRefByLinkText() {
+        return this.locatorRefByLinkText.getText();
+    }
+    
+    public String invokeMethodOnElementRefByPartialLinkText() {
+        return this.locatorRefByPartialLinkText.getText();
     }
 
     public WebElement getRootProxy() {

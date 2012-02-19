@@ -1,4 +1,4 @@
-package cz.fi.muni.jhuska.bc.test;
+package cz.fi.muni.jhuska.bc.unit.test;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;

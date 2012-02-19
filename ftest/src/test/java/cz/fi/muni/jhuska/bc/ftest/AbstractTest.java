@@ -1,9 +1,9 @@
-package cz.fi.muni.jhuska.bc.test;
+package cz.fi.muni.jhuska.bc.ftest;
 
 import java.io.File;
 
 import org.apache.commons.lang.WordUtils;
-import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeMethod;
 
 public class AbstractTest extends Arquillian {
 
+    @Drone
     protected WebDriver webDriver;
 
     private static final String WEBAPP_SRC = "src/test/webapp";

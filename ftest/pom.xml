@@ -15,6 +15,7 @@
         <arquillian.version>1.0.0.CR7</arquillian.version>
         <org.richfaces.bom.version>4.1.0.Final</org.richfaces.bom.version>
         <jbossas7.version>7.1.0.Final</jbossas7.version>
+        <arquillian.drone.version>1.0.0.CR3</arquillian.drone.version>
     </properties>
 
     <dependencyManagement>
@@ -26,6 +27,14 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+            <!-- Arquillian Drone dependencies and Selenium dependencies -->
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-bom</artifactId>
+                <version>${arquillian.drone.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -35,8 +44,14 @@
             <groupId>cz.jhuska.bachelor.thesis</groupId>
             <artifactId>bachelor-thesis-impl</artifactId>
             <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
-
+       <dependency>
+            <groupId>cz.jhuska.bachelor.thesis</groupId>
+            <artifactId>bachelor-thesis-api</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency> 
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.testng</groupId>
@@ -48,10 +63,32 @@
             <version>1.8.5</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium</artifactId>
             <type>pom</type>
+        </dependency> -->
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-drone-webdriver</artifactId>
+        </dependency>
+        <!-- Support for Selenium in Arquillian Drone -->
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-drone-selenium</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Arquillian Drone support in Arquillian tests -->
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-drone-impl</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.testng</groupId>
@@ -105,7 +142,7 @@
     </dependencies>
 
     <build>
-       
+
     </build>
 
     <profiles>

@@ -1,4 +1,4 @@
-package cz.fi.muni.jhuska.bc.test;
+package cz.fi.muni.jhuska.bc.ftest.components;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import cz.fi.muni.jhuska.bc.api.Calendar;
 import cz.fi.muni.jhuska.bc.api.Factory;
+import cz.fi.muni.jhuska.bc.ftest.AbstractTest;
 import cz.fi.muni.jhuska.bc.impl.CalendarImpl;
 
 public class TestCalendar extends AbstractTest {
@@ -34,8 +35,6 @@ public class TestCalendar extends AbstractTest {
     @BeforeClass
     public void initCalendar() {
         calendar = Factory.initializeComponent(CalendarImpl.class);
-
-        webDriver = new FirefoxDriver();
     }
     
     @BeforeMethod

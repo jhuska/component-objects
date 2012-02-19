@@ -23,4 +23,8 @@
         </protocol>
     </container>
 
+    <extension qualifier="webdriver">
+        <property name="implementationClass">org.openqa.selenium.firefox.FirefoxDriver</property>
+    </extension>
+
 </arquillian>

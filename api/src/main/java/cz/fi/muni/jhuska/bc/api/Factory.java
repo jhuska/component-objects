@@ -125,7 +125,7 @@ public class Factory {
 
         value = referencedByAnnotation.css().trim();
         if(!value.isEmpty()) {
-            return By.className(value);
+            return By.cssSelector(value);
         }
         
         value = referencedByAnnotation.id().trim();
