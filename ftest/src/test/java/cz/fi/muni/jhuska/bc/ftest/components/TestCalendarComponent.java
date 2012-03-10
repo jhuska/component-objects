@@ -142,7 +142,7 @@ public class TestCalendarComponent extends AbstractTest {
         Date date1 = new Date(System.currentTimeMillis());
         Calendar cal = new GregorianCalendar();
         cal.setTime(date1);
-        cal.roll(Calendar.YEAR, false);
+        cal.roll(Calendar.YEAR, -30);
         cal.roll(Calendar.MONTH, false);
         date1 = cal.getTime();
         

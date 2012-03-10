@@ -38,7 +38,13 @@ public class CalendarComponentImpl extends AbstractComponent implements Calendar
     @ReferencedBy(css = "div[class=\"rf-cal-time-btn\"]:nth-of-type(1)")
     private WebElement okButton;
 
-    private final String YEAR_LOCATOR_CSS = "div[class=\"rf-cal-edtr-btn\"]";
+    @ReferencedBy(css = "div[class=\"rf-cal-edtr-btn\"]:nth-of-type(4)")
+    private WebElement nextDecade;
+    
+    @ReferencedBy(css = "div[class=\"rf-cal-edtr-btn\"]:nth-of-type(3)")
+    private WebElement previousDecade;
+    
+    private final String YEAR_AND_MONTH_LOCATOR_CSS = "div[class=\"rf-cal-edtr-btn\"]";
     private final String DAY_LOCATOR_CLASS = "rf-cal-c";
 
     /**
@@ -113,28 +119,36 @@ public class CalendarComponentImpl extends AbstractComponent implements Calendar
 
         int todayYear = cal.get(Calendar.YEAR);
         int todayMonth = cal.get(Calendar.MONTH);
-        int todayDay = cal.get(Calendar.DAY_OF_MONTH);
+        // int todayDay = cal.get(Calendar.DAY_OF_MONTH);
 
         showYearAndMonthEditorButton.click();
 
         if ((wishedYear != todayYear) || (wishedMonth != todayMonth)) {
-
-            List<WebElement> years = root.findElements(By.cssSelector(YEAR_LOCATOR_CSS));
+            List<WebElement> years;
             String txt;
 
+            boolean wasYearSelected = false;
+            while(true) {
+                wasYearSelected = selectYear(wishedYear);
+                
+                if(wasYearSelected) {
+                    break;
+                }
+                
+                if(todayYear > wishedYear) {
+                    previousDecade.click();
+                }
+                if(todayYear < wishedYear) {
+                    nextDecade.click();
+                }
+            }    
+                
+            years = root.findElements(By.cssSelector(YEAR_AND_MONTH_LOCATOR_CSS));
+
             for (WebElement i : years) {
-
                 txt = i.getText().trim();
-                int year;
 
-                if (txt.matches("\\d+?")) {
-                    year = new Integer(txt);
-
-                    if (wishedYear == year) {
-                        i.click();
-                        // break;
-                    }
-                } else if (txt.matches("[a-zA-Z]+?")) {
+                if (txt.matches("[a-zA-Z]+?")) {
                     if (txt.equals("Jan") && wishedMonth == 0) {
                         i.click();
                         // break;
@@ -168,7 +182,7 @@ public class CalendarComponentImpl extends AbstractComponent implements Calendar
                     } else if (txt.equals("Nov") && wishedMonth == 10) {
                         i.click();
                         // break;
-                    } else if (txt.equals("Dec") && wishedDay == 11) {
+                    } else if (txt.equals("Dec") && wishedMonth == 11) {
                         i.click();
                         // break;
                     }
@@ -176,9 +190,8 @@ public class CalendarComponentImpl extends AbstractComponent implements Calendar
             }
 
             okButton.click();
-
         }
-        
+
         List<WebElement> days = root.findElements(By.className(DAY_LOCATOR_CLASS));
         String txt;
         for (WebElement i : days) {
@@ -189,6 +202,33 @@ public class CalendarComponentImpl extends AbstractComponent implements Calendar
                 break;
             }
         }
+    }
+
+    /**
+     * Selects the year on the calendar, note that the month and year editor has to be shown already
+     * 
+     * @param wishedYear the year you want to set
+     * @return true if the year was successfully set, false otherwise
+     */
+    private boolean selectYear(int wishedYear) {
+        List<WebElement> years = root.findElements(By.cssSelector(YEAR_AND_MONTH_LOCATOR_CSS));
+        String txt;
+
+        for (WebElement i : years) {
+
+            txt = i.getText().trim();
+            int year;
+
+            if (txt.matches("\\d+?")) {
+                year = new Integer(txt);
+
+                if (wishedYear == year) {
+                    i.click();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -395,7 +435,7 @@ public class CalendarComponentImpl extends AbstractComponent implements Calendar
     }
 
     public String getYearLocator() {
-        return YEAR_LOCATOR_CSS;
+        return YEAR_AND_MONTH_LOCATOR_CSS;
     }
 
     /**
@@ -403,6 +443,38 @@ public class CalendarComponentImpl extends AbstractComponent implements Calendar
      */
     public void setShowCalendarButton(WebElement showCalendarButton) {
         this.showCalendarButton = showCalendarButton;
+    }
+
+    public WebElement getOkButton() {
+        return okButton;
+    }
+
+    public WebElement getNextDecade() {
+        return nextDecade;
+    }
+
+    public WebElement getPreviousDecade() {
+        return previousDecade;
+    }
+
+    public String getYEAR_AND_MONTH_LOCATOR_CSS() {
+        return YEAR_AND_MONTH_LOCATOR_CSS;
+    }
+
+    public String getDAY_LOCATOR_CLASS() {
+        return DAY_LOCATOR_CLASS;
+    }
+
+    public void setOkButton(WebElement okButton) {
+        this.okButton = okButton;
+    }
+
+    public void setNextDecade(WebElement nextDecade) {
+        this.nextDecade = nextDecade;
+    }
+
+    public void setPreviousDecade(WebElement previousDecade) {
+        this.previousDecade = previousDecade;
     }
 
     public WebElement getInput() {
