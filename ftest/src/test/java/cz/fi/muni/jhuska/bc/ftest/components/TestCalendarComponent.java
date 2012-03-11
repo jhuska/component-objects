@@ -150,8 +150,11 @@ public class TestCalendarComponent extends AbstractTest {
 
         String inputValue = webDriver.findElement(CALENDAR_INPUT).getAttribute("value");
         Date date2 = getDateFromString(inputValue);
-        assertEquals(date1.getMonth(), date2.getMonth(), "The got date should be the same as the one which was set!");
-        assertEquals(date1.getYear(), date2.getYear(), "The got date should be the same as the one which was set!");
+        Calendar cal2 = new GregorianCalendar();
+        cal2.setTime(date2);
+        
+        assertEquals(cal.get(Calendar.MONTH) , cal2.get(Calendar.MONTH), "The got date should be the same as the one which was set!");
+        assertEquals(cal.get(Calendar.YEAR) , cal2.get(Calendar.YEAR), "The got date should be the same as the one which was set!");
     }
 
     @Test
