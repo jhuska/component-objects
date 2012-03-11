@@ -38,7 +38,8 @@ public class TestCalendarComponent extends AbstractTest {
     private CalendarComponent calendar;
 
     private final By CALENDAR_INPUT = By.className("rf-cal-inp");
-    private final String DATE_FORMAT = "dd/M/yy hh:mm a";
+    //do not forget also to set accordingly the model's date format
+    private final String DATE_FORMAT = "dd/M/yyyy hh:mm a";
 
     // @Inject
     // private Page page;
@@ -138,23 +139,39 @@ public class TestCalendarComponent extends AbstractTest {
     }
 
     @Test
-    public void testGotoDate() {
-        Date date1 = new Date(System.currentTimeMillis());
+    public void testGotoDate50YearsInFuture() {
+    	checkGotoDate(50);
+    }
+    
+    @Test
+    public void testGotoDate50YearsInPast() {
+    	checkGotoDate(-50);
+    }
+
+    /**
+     * Checks the the gotoDate
+     * 
+     * @param yearShift, how is the tested year shifted, when positive number then shifted towards future by amount of this param,
+     * 					when negative then shifted back to the past
+     */
+    private void checkGotoDate(int yearShift) {
+    	Date date1 = new Date(System.currentTimeMillis());
         Calendar cal = new GregorianCalendar();
         cal.setTime(date1);
-        cal.roll(Calendar.YEAR, -30);
+        cal.roll(Calendar.YEAR, yearShift);
         cal.roll(Calendar.MONTH, false);
         date1 = cal.getTime();
         
-        calendar.gotoDate(date1);
+    	calendar.gotoDate(date1);
 
         String inputValue = webDriver.findElement(CALENDAR_INPUT).getAttribute("value");
         Date date2 = getDateFromString(inputValue);
         Calendar cal2 = new GregorianCalendar();
         cal2.setTime(date2);
+        int foo = cal2.get(Calendar.YEAR);
         
-        assertEquals(cal.get(Calendar.MONTH) , cal2.get(Calendar.MONTH), "The got date should be the same as the one which was set!");
-        assertEquals(cal.get(Calendar.YEAR) , cal2.get(Calendar.YEAR), "The got date should be the same as the one which was set!");
+        assertEquals( cal2.get(Calendar.MONTH), cal.get(Calendar.MONTH), "The got date should be the same as the one which was set!");
+        assertEquals( cal2.get(Calendar.YEAR), cal.get(Calendar.YEAR), "The got date should be the same as the one which was set!");
     }
 
     @Test
@@ -440,7 +457,7 @@ public class TestCalendarComponent extends AbstractTest {
     }
 
     /**
-     * Parse the <code>string</code> value and returns the Date, the date is in format dd/M/yy hh:mm a
+     * Parse the <code>string</code> value and returns the Date, the date is in format <code>DATE_FORMAT</code>
      * 
      * @param string
      * @return
