@@ -5,7 +5,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -40,7 +39,6 @@ public class Factory {
                     WebElement rootElement = (WebElement) Proxy.newProxyInstance(WebElement.class.getClassLoader(),
                         new Class<?>[] { WebElement.class }, new InvocationHandler() {
 
-                            @Override
                             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                                 WebElement root = rootReference.get();
                                 if (root == null) {
@@ -71,7 +69,6 @@ public class Factory {
                     WebElement referencedElement = (WebElement) Proxy.newProxyInstance(WebElement.class.getClassLoader(),
                         new Class<?>[] { WebElement.class }, new InvocationHandler() {
 
-                            @Override
                             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                                 WebElement root = rootReference.get();
                                 if (root == null) {
