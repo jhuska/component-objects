@@ -144,6 +144,6 @@ public interface AutocompleteComponent extends Component {
 		 * 
 		 * @return
 		 */
-		String value();
+		String getValue();
 	}
 }
