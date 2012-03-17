@@ -5,6 +5,13 @@ import java.util.List;
 public interface DataTableComponent extends Component {
 
 	/**
+	 * Associates this data table with a given data scroller
+	 * 
+	 * @param scroller the scroller to associate this table with
+	 */
+	void setDateScroller(DataScrollerComponent scroller);
+	
+	/**
 	 * <p>
 	 * Returns the total number of rows in this particular table.
 	 * </p>
