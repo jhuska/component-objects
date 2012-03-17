@@ -2,6 +2,12 @@ package cz.fi.muni.jhuska.bc.api;
 
 import java.util.List;
 
+/**
+ * Validation component represents all kind of validation messages mostly.
+ * 
+ * @author jhuska
+ *
+ */
 public interface ValidationComponent extends Component {
 
 	/**

@@ -2,6 +2,18 @@ package cz.fi.muni.jhuska.bc.api;
 
 import java.util.List;
 
+/**
+ * <p>
+ * Autocomplete component represents an input with autocomplete function.
+ * </p>
+ * <p>
+ * That is when you start typing, some suggestions are offered to you, which you
+ * can choose from, to fill in the input faster.
+ * </p>
+ * 
+ * @author jhuska
+ * 
+ */
 public interface AutocompleteComponent extends Component {
 
 	/**

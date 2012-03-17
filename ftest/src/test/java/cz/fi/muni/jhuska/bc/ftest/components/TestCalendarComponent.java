@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.bouncycastle.crypto.RuntimeCryptoException;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.joda.time.DateTime;
@@ -25,17 +24,18 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import cz.fi.muni.jhuska.bc.api.CalendarComponent;
-import cz.fi.muni.jhuska.bc.api.CalendarComponent.CalendarDay;
-import cz.fi.muni.jhuska.bc.api.CalendarComponent.CalendarWeek;
+import cz.fi.muni.jhuska.bc.api.CalendarPopupComponent;
+import cz.fi.muni.jhuska.bc.api.CalendarPopupComponent.CalendarDay;
+import cz.fi.muni.jhuska.bc.api.CalendarPopupComponent.CalendarWeek;
 import cz.fi.muni.jhuska.bc.api.Factory;
 import cz.fi.muni.jhuska.bc.api.ScrollingType;
 import cz.fi.muni.jhuska.bc.ftest.AbstractTest;
-import cz.fi.muni.jhuska.bc.impl.CalendarComponentImpl;
+import cz.fi.muni.jhuska.bc.impl.CalendarPopupComponentImpl;
 
 public class TestCalendarComponent extends AbstractTest {
 
     // @FindBy(xpath = "//td[@class='ecol1']")
-    private CalendarComponent calendar;
+    private CalendarPopupComponent calendar;
 
     private final By CALENDAR_INPUT = By.className("rf-cal-inp");
     //do not forget also to set accordingly the model's date format
@@ -53,7 +53,7 @@ public class TestCalendarComponent extends AbstractTest {
 
     @BeforeClass
     public void initCalendar() {
-        calendar = Factory.initializeComponent(CalendarComponentImpl.class);
+        calendar = Factory.initializeComponent(CalendarPopupComponentImpl.class);
     }
 
     @BeforeMethod

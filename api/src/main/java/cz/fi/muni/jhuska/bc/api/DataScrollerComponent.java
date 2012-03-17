@@ -1,5 +1,17 @@
 package cz.fi.muni.jhuska.bc.api;
 
+/**
+ * <p>
+ * DataScrollerComponent represents a scroller attached to some data structure,
+ * like to the table.
+ * </p>
+ * <p>
+ * His purpose is to scroll over data, which is divided into multiple pages.
+ * </p>
+ * 
+ * @author jhuska
+ * 
+ */
 public interface DataScrollerComponent extends Component {
 
 	/**
@@ -24,7 +36,7 @@ public interface DataScrollerComponent extends Component {
 	 * @return false if the scroller is already on the last page, true otherwise
 	 */
 	boolean gotoNextPage();
-	
+
 	/**
 	 * <p>
 	 * Goes to the previous page of data structure the scroller is bounded to.
@@ -34,12 +46,14 @@ public interface DataScrollerComponent extends Component {
 	 * will be on the page number 1.
 	 * </p>
 	 * 
-	 * @return false if the scroller is already on the first page, true otherwise
+	 * @return false if the scroller is already on the first page, true
+	 *         otherwise
 	 */
 	boolean gotoPreviousPage();
-	
+
 	/**
 	 * Returns the total number of pages, the data structure is divided to.
+	 * 
 	 * @return
 	 */
 	int getNumberOfPages();

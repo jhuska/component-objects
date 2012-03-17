@@ -2,15 +2,27 @@ package cz.fi.muni.jhuska.bc.api;
 
 import java.util.List;
 
+/**
+ * <p>
+ * DataTableComponent represents a table.
+ * </p>
+ * <p>
+ * It consist from cells, which are joined into rows and columns.
+ * </p>
+ * 
+ * @author jhuska
+ * 
+ */
 public interface DataTableComponent extends Component {
 
 	/**
 	 * Associates this data table with a given data scroller
 	 * 
-	 * @param scroller the scroller to associate this table with
+	 * @param scroller
+	 *            the scroller to associate this table with
 	 */
 	void setDateScroller(DataScrollerComponent scroller);
-	
+
 	/**
 	 * <p>
 	 * Returns the total number of rows in this particular table.
@@ -116,22 +128,24 @@ public interface DataTableComponent extends Component {
 	 * Returns the row, determined by the row header.
 	 * </p>
 	 * <p>
-	 * If such header does not exist or that header is associated rather with column,
-	 * then null is returned.
+	 * If such header does not exist or that header is associated rather with
+	 * column, then null is returned.
 	 * </p>
 	 * 
-	 * @param header the header of the requested row
+	 * @param header
+	 *            the header of the requested row
 	 * @return the particular row, or null if it does not exist
 	 */
 	Row getRow(Header header);
-	
+
 	/**
 	 * <p>
 	 * Returns the column with the order determined by given param
 	 * <code>order</code>.
 	 * </p>
 	 * <p>
-	 * Columns are indexed from 0. The header column if available is not counted.
+	 * Columns are indexed from 0. The header column if available is not
+	 * counted.
 	 * </p>
 	 * 
 	 * @param order
@@ -139,17 +153,18 @@ public interface DataTableComponent extends Component {
 	 * @return the particular column, or null if it does not exist
 	 */
 	Column getColumn(int order);
-	
+
 	/**
 	 * <p>
 	 * Returns the column, determined by the row header.
 	 * </p>
 	 * <p>
-	 * If such header does not exist or that header is associated rather with row,
-	 * then null is returned.
+	 * If such header does not exist or that header is associated rather with
+	 * row, then null is returned.
 	 * </p>
 	 * 
-	 * @param header the header of requested column
+	 * @param header
+	 *            the header of requested column
 	 * @return the particular column, or null if it does not exist
 	 */
 	Column getColumn(Header header);

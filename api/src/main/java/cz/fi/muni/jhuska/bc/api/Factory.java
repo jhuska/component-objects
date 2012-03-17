@@ -13,6 +13,12 @@ import org.openqa.selenium.WebElement;
 import cz.fi.muni.jhuska.bc.annotations.ReferencedBy;
 import cz.fi.muni.jhuska.bc.annotations.Root;
 
+/**
+ * Factory class for initialising the particular <code>Component</code>.
+ * 
+ * @author jhuska
+ *
+ */
 public class Factory {
 
     /**

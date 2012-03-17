@@ -15,11 +15,11 @@ import org.openqa.selenium.WebElement;
 import cz.fi.muni.jhuska.bc.annotations.ReferencedBy;
 import cz.fi.muni.jhuska.bc.annotations.Root;
 import cz.fi.muni.jhuska.bc.api.AbstractComponent;
-import cz.fi.muni.jhuska.bc.api.CalendarComponent;
+import cz.fi.muni.jhuska.bc.api.CalendarPopupComponent;
 import cz.fi.muni.jhuska.bc.api.ScrollingType;
 
-public class CalendarComponentImpl extends AbstractComponent implements
-		CalendarComponent {
+public class CalendarPopupComponentImpl extends AbstractComponent implements
+		CalendarPopupComponent {
 
 	@Root
 	private WebElement root;
