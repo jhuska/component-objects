@@ -11,6 +11,7 @@
 		<module>api</module>
 		<module>impl</module>
 		<module>ftest</module>
+		<module>drone</module>
 	</modules>
 
 	<properties>
@@ -20,10 +21,31 @@
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<version.arquillian.core>1.0.0.CR7</version.arquillian.core>
+		<version.arquillian.drone>1.0.0.CR3</version.arquillian.drone>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- Arquillian dependencies -->
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>${version.arquillian.core}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+
+			<!-- Arquillian Drone dependencies and Selenium dependencies -->
+			<dependency>
+				<groupId>org.jboss.arquillian.extension</groupId>
+				<artifactId>arquillian-drone-bom</artifactId>
+				<version>${version.arquillian.drone}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			
 			<dependency>
 				<groupId>org.testng</groupId>
 				<artifactId>testng</artifactId>
