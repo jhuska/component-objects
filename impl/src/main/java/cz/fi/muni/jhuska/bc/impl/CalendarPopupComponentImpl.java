@@ -9,10 +9,9 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-import cz.fi.muni.jhuska.bc.annotations.ReferencedBy;
 import cz.fi.muni.jhuska.bc.annotations.Root;
 import cz.fi.muni.jhuska.bc.api.AbstractComponent;
 import cz.fi.muni.jhuska.bc.api.CalendarPopupComponent;
@@ -24,25 +23,25 @@ public class CalendarPopupComponentImpl extends AbstractComponent implements
 	@Root
 	private WebElement root;
 
-	@ReferencedBy(clazz = "rf-cal-inp")
+	@FindBy(className = "rf-cal-inp")
 	private WebElement input;
 
-	@ReferencedBy(css = "td[class=\"rf-cal-hdr-month\"] > div")
+	@FindBy(css = "td[class=\"rf-cal-hdr-month\"] > div")
 	private WebElement showYearAndMonthEditorButton;
 
-	@ReferencedBy(css = "img:nth-of-type(1)")
+	@FindBy(css = "img:nth-of-type(1)")
 	private WebElement showCalendarButton;
 
-	@ReferencedBy(clazz = "rf-cal-day-lbl")
+	@FindBy(className = "rf-cal-day-lbl")
 	private WebElement popupWithCalendar;
 
-	@ReferencedBy(css = "div[class=\"rf-cal-time-btn\"]:nth-of-type(1)")
+	@FindBy(css = "div[class=\"rf-cal-time-btn\"]:nth-of-type(1)")
 	private WebElement okButton;
 
-	@ReferencedBy(css = "table[class=\"rf-cal-monthpicker-cnt\"] td:nth-of-type(4) > div")
+	@FindBy(css = "table[class=\"rf-cal-monthpicker-cnt\"] td:nth-of-type(4) > div")
 	private WebElement nextDecade;
 
-	@ReferencedBy(css = "table[class=\"rf-cal-monthpicker-cnt\"] td:nth-of-type(3) > div")
+	@FindBy(css = "table[class=\"rf-cal-monthpicker-cnt\"] td:nth-of-type(3) > div")
 	private WebElement previousDecade;
 
 	private final String YEAR_AND_MONTH_LOCATOR_CSS = "div[class=\"rf-cal-edtr-btn\"]";
@@ -68,47 +67,10 @@ public class CalendarPopupComponentImpl extends AbstractComponent implements
 	@Override
 	public void hideCalendar() {
 
-		try {
-			if (popupWithCalendar.isDisplayed()) {
-				showCalendarButton.click();
-			}
-		} catch (NoSuchElementException ex) {
-			throw new RuntimeException(
-					"You are invoking hide mothod on non existing element, did you provide right ReferencedBy annotation or is not it an inline calendar?");
-		}
+		showCalendar();
 	}
 
-	@Override
-	public Date getDate() {
-		String dateString = input.getAttribute("value");
-		if (dateString.trim().length() == 0) {
-			return null;
-		}
-
-		if (dateFormat == null) {
-			throw new RuntimeException(
-					"You have to set date format first to get date!");
-		}
-		SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
-
-		Date date = null;
-		try {
-			date = formatter.parse(dateString);
-		} catch (ParseException e) {
-			throw new RuntimeException(
-					"Parse date exception: did you provided the right dateFormat?");
-		}
-
-		return date;
-	}
-
-	@Override
-	public DateTime getDateTime() {
-		throw new UnsupportedOperationException("Not implemented yet!");
-	}
-
-	@Override
-	public void gotoDate(Date date) {
+	private void gotoDate(Date date) {
 		showCalendar();
 
 		Calendar cal = new GregorianCalendar();
@@ -240,31 +202,56 @@ public class CalendarPopupComponentImpl extends AbstractComponent implements
 	}
 
 	@Override
-	public void gotoDate(DateTime dateTime) {
+	public void gotoDateTime(DateTime dateTime) {
 		Date date = dateTime.toDate();
 		gotoDate(date);
 	}
 
 	@Override
-	public void gotoDate(Date date, ScrollingType type) {
+	public void gotoDateTime(DateTime dateTime, ScrollingType type) {
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
 
+	private Date getDate() {
+		String dateString = input.getAttribute("value");
+		if (dateString.trim().length() == 0) {
+			return null;
+		}
+
+		if (dateFormat == null) {
+			throw new RuntimeException(
+					"You have to set date format first to get date!");
+		}
+		SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+
+		Date date = null;
+		try {
+			date = formatter.parse(dateString);
+		} catch (ParseException e) {
+			throw new RuntimeException(
+					"Parse date exception: did you provided the right dateFormat?");
+		}
+
+		return date;
+	}
+
 	@Override
-	public void gotoDate(DateTime dateTime, ScrollingType type) {
-		throw new UnsupportedOperationException("Not implemented yet!");
+	public DateTime getDateTime() {
+		DateTime dateTime = new DateTime(this.getDate());
+
+		return dateTime;
 	}
 
 	@Override
 	public CalendarDay gotoNextDay() {
-		Date date = getDate();
+		Date date = getDateTime().toDate();
 		Calendar cal = new GregorianCalendar();
 		cal.setTime(date);
 		cal.roll(Calendar.DAY_OF_MONTH, true);
-		
+
 		gotoDate(cal.getTime());
-		
-//		CalendarDay day = new CalendarDayImpl();
+
+		// CalendarDay day = new CalendarDayImpl();
 		return null;
 	}
 
@@ -519,147 +506,147 @@ public class CalendarPopupComponentImpl extends AbstractComponent implements
 			WebElement showYearAndMonthEditorButton) {
 		this.showYearAndMonthEditorButton = showYearAndMonthEditorButton;
 	}
-	
-//	public class TimeUnitImpl implements TimeUnit {
-//
-//		@Override
-//		public int toInt() {
-//			// TODO Auto-generated method stub
-//			return 0;
-//		}
-//		
-//	}
-//	
-//	public class CalendarDayImpl implements CalendarDay {
-//
-//		@Override
-//		public boolean isEnabled() {
-//			// TODO Auto-generated method stub
-//			return false;
-//		}
-//
-//		@Override
-//		public CalendarMonth whichMonth() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public CalendarYear whichYear() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//	}
-//	
-//	public class CalendarWeekImpl implements CalendarWeek {
-//
-//		@Override
-//		public List<CalendarDay> getDays() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public CalendarDay getDay(int day) {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public CalendarMonth whichMonth() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public CalendarYear whichYear() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//	}
-//	
-//	public class CalendarMonthImpl implements CalendarMonth {
-//
-//		@Override
-//		public int toInt() {
-//			// TODO Auto-generated method stub
-//			return 0;
-//		}
-//
-//		@Override
-//		public List<CalendarDay> getDays() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public List<CalendarWeek> getWeeks() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public CalendarDay getDay(int day) {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public CalendarWeek getWeek(int week) {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public CalendarYear whichYear() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//	}
-//	
-//	public class CalendarYearImpl implements CalendarYear {
-//
-//		@Override
-//		public int toInt() {
-//			// TODO Auto-generated method stub
-//			return 0;
-//		}
-//
-//		@Override
-//		public List<CalendarDay> getDays() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public List<CalendarWeek> getWeeks() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public List<CalendarMonth> getMonths() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public CalendarDay getDay(int day) {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public CalendarWeek getWeek(int week) {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public CalendarMonth getMonth(int month) {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//		
-//	}
+
+	// public class TimeUnitImpl implements TimeUnit {
+	//
+	// @Override
+	// public int toInt() {
+	// // TODO Auto-generated method stub
+	// return 0;
+	// }
+	//
+	// }
+	//
+	// public class CalendarDayImpl implements CalendarDay {
+	//
+	// @Override
+	// public boolean isEnabled() {
+	// // TODO Auto-generated method stub
+	// return false;
+	// }
+	//
+	// @Override
+	// public CalendarMonth whichMonth() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public CalendarYear whichYear() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	// }
+	//
+	// public class CalendarWeekImpl implements CalendarWeek {
+	//
+	// @Override
+	// public List<CalendarDay> getDays() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public CalendarDay getDay(int day) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public CalendarMonth whichMonth() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public CalendarYear whichYear() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	// }
+	//
+	// public class CalendarMonthImpl implements CalendarMonth {
+	//
+	// @Override
+	// public int toInt() {
+	// // TODO Auto-generated method stub
+	// return 0;
+	// }
+	//
+	// @Override
+	// public List<CalendarDay> getDays() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public List<CalendarWeek> getWeeks() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public CalendarDay getDay(int day) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public CalendarWeek getWeek(int week) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public CalendarYear whichYear() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	// }
+	//
+	// public class CalendarYearImpl implements CalendarYear {
+	//
+	// @Override
+	// public int toInt() {
+	// // TODO Auto-generated method stub
+	// return 0;
+	// }
+	//
+	// @Override
+	// public List<CalendarDay> getDays() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public List<CalendarWeek> getWeeks() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public List<CalendarMonth> getMonths() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public CalendarDay getDay(int day) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public CalendarWeek getWeek(int week) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public CalendarMonth getMonth(int month) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// }
 }
