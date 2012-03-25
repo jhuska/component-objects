@@ -5,12 +5,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-import cz.fi.muni.jhuska.bc.annotations.ReferencedBy;
 import cz.fi.muni.jhuska.bc.annotations.Root;
 
 /**
@@ -70,9 +69,9 @@ public class Factory {
                     }
                 }
 
-                if (j instanceof ReferencedBy) {
+                if (j instanceof FindBy) {
 
-                    final By referencedBy = getReferencedBy((ReferencedBy) j);
+                    final By findBy = getReferencedBy((FindBy) j);
 
                     WebElement referencedElement = (WebElement) Proxy.newProxyInstance(WebElement.class.getClassLoader(),
                         new Class<?>[] { WebElement.class }, new InvocationHandler() {
@@ -84,7 +83,7 @@ public class Factory {
                                     throw new RuntimeException("You have to set root element correctly!");
                                 }
 
-                                WebElement myElement = root.findElement(referencedBy);
+                                WebElement myElement = root.findElement(findBy);
 
                                 return method.invoke(myElement, args);
                             }
@@ -123,45 +122,45 @@ public class Factory {
      * can I do it in better way ?to iterate over all annotations methods and invoke them on what ?obviously it is not possible
      * to invoke it on annotation, since it can not be instantiated
      */
-    private static By getReferencedBy(ReferencedBy referencedByAnnotation) {
+    private static By getReferencedBy(FindBy findByAnnotation) {
         String value = null;
 
-        value = referencedByAnnotation.clazz().trim();
+        value = findByAnnotation.className().trim();
         if (!value.isEmpty()) {
             return By.className(value);
         }
 
-        value = referencedByAnnotation.css().trim();
+        value = findByAnnotation.css().trim();
         if (!value.isEmpty()) {
             return By.cssSelector(value);
         }
 
-        value = referencedByAnnotation.id().trim();
+        value = findByAnnotation.id().trim();
         if (!value.isEmpty()) {
             return By.id(value);
         }
 
-        value = referencedByAnnotation.xPath().trim();
+        value = findByAnnotation.xpath().trim();
         if (!value.isEmpty()) {
             return By.xpath(value);
         }
 
-        value = referencedByAnnotation.name().trim();
+        value = findByAnnotation.name().trim();
         if (!value.isEmpty()) {
             return By.name(value);
         }
 
-        value = referencedByAnnotation.tagName().trim();
+        value = findByAnnotation.tagName().trim();
         if (!value.isEmpty()) {
             return By.tagName(value);
         }
 
-        value = referencedByAnnotation.linkText().trim();
+        value = findByAnnotation.linkText().trim();
         if (!value.isEmpty()) {
             return By.linkText(value);
         }
 
-        value = referencedByAnnotation.partialLinkText().trim();
+        value = findByAnnotation.partialLinkText().trim();
         if (!value.isEmpty()) {
             return By.partialLinkText(value);
         }
