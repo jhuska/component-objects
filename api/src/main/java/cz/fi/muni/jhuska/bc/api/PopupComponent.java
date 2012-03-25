@@ -16,24 +16,8 @@ package cz.fi.muni.jhuska.bc.api;
 public interface PopupComponent extends ComponentsContainer {
 
 	/**
-	 * <p>
-	 * Shows the popup panel.
-	 * </p>
-	 * <p>
-	 * It can be done in different ways, for example by clicking, hovering over
-	 * something, in other words it depends on the implementation.
-	 * </p>
+	 * Returns whether this popup is visible.
+	 * @return
 	 */
-	void showPopup();
-
-	/**
-	 * <p>
-	 * Hides the popup panel.
-	 * </p>
-	 * <p>
-	 * It can be done in different ways, for example by clicking, hovering out
-	 * from something, in other words it depends on the implementation.
-	 * </p>
-	 */
-	void hidePopup();
+	boolean isVisible();
 }
