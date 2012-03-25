@@ -17,13 +17,20 @@
 	<properties>
 		<testng.version>5.14.6</testng.version>
 		<jodatime.version>2.0</jodatime.version>
-		<selenium.version>2.0rc2</selenium.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
+
 		<version.arquillian.core>1.0.0.CR7</version.arquillian.core>
 		<version.arquillian.drone>1.0.0.CR3</version.arquillian.drone>
+
+		<version.selenium>2.0rc2</version.selenium>
+		<version.selenium.java>2.19.0</version.selenium.java>
+		<version.selenium.server>2.19.0</version.selenium.server>
+
+		<org.richfaces.bom.version>4.1.0.Final</org.richfaces.bom.version>
+		
+		<jbossas7.version>7.1.0.Final</jbossas7.version>
 	</properties>
 
 	<dependencyManagement>
@@ -45,7 +52,16 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			
+
+			<!-- RichFaces dependencies -->
+			<dependency>
+				<groupId>org.richfaces</groupId>
+				<artifactId>richfaces-bom</artifactId>
+				<version>${org.richfaces.bom.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+
 			<dependency>
 				<groupId>org.testng</groupId>
 				<artifactId>testng</artifactId>
@@ -59,8 +75,18 @@
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium</artifactId>
-				<version>${selenium.version}</version>
+				<version>${version.selenium}</version>
 				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-java</artifactId>
+				<version>${version.selenium.java}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-server</artifactId>
+				<version>${version.selenium.server}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -76,4 +102,46 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>jbossas-remote-7</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.spec</groupId>
+					<artifactId>jboss-javaee-6.0</artifactId>
+					<version>1.0.0.Final</version>
+					<type>pom</type>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.as</groupId>
+					<artifactId>jboss-as-arquillian-container-remote</artifactId>
+					<version>${jbossas7.version}</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>2.9</version>
+						<executions>
+							<execution>
+								<id>test</id>
+								<goals>
+									<goal>test</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<systemProperties>
+								<arquillian.launch>jbossas-remote-7</arquillian.launch>
+							</systemProperties>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>

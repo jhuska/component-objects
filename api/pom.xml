@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>bachelor-thesis-parent</artifactId>
         <groupId>cz.jhuska.bachelor.thesis</groupId>
+		<artifactId>bachelor-thesis-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
