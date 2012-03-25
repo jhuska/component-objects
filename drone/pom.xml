@@ -13,11 +13,17 @@
 	<description>Support for Arquillian Drone extension</description>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>cz.jhuska.bachelor.thesis</groupId>
 			<artifactId>bachelor-thesis-api</artifactId>
 			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>cz.jhuska.bachelor.thesis</groupId>
+			<artifactId>bachelor-thesis-api</artifactId>
+			<version>${project.version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>cz.jhuska.bachelor.thesis</groupId>
@@ -53,19 +59,25 @@
 			<artifactId>arquillian-config-api</artifactId>
 		</dependency>
 
-		<!-- Selenium dependencies -->
+		<!-- Arquillian Drone support in Arquillian tests -->
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-drone-impl</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.testng</groupId>
+			<artifactId>arquillian-testng-container</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<scope>provided</scope>
 		</dependency>
-
-		<!-- required to create selenium instances -->
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<scope>test</scope>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-server</artifactId>
 		</dependency>
-
 	</dependencies>
+
 </project>
