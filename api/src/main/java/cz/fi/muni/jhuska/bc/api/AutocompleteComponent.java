@@ -60,6 +60,16 @@ public interface AutocompleteComponent extends Component {
 	Suggestion getFirstSuggestion();
 
 	/**
+	 * Returns the suggestion which is in order determined by param
+	 * <code>order</code>. If there is no so many suggestion or none, then null
+	 * is returned.
+	 * 
+	 * @param order
+	 * @return
+	 */
+	Suggestion getNthSuggestion(int order);
+
+	/**
 	 * <p>
 	 * Types to the autocomplete input the provided string at once and returns
 	 * the suggestions if provided.
