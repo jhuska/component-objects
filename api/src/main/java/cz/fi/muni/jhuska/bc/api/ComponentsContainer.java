@@ -9,23 +9,7 @@ import java.util.List;
  * @author jhuska
  * 
  */
-public interface ComponentsContainer extends Component {
-
-	/**
-	 * Adds given component to the content of the popup.
-	 * 
-	 * @param component
-	 *            the particular component to be added to content
-	 */
-	Component addComponent(Component component);
-
-	/**
-	 * Removes given component from the content of the popup.
-	 * 
-	 * @param component
-	 *            the particular component to be removed from content
-	 */
-	Component removeComponent(Component component);
+public interface ComponentsContainer<T extends NestedElements> extends Component {
 
 	/**
 	 * Returns the content of the popup, in other words List containing all
@@ -33,6 +17,6 @@ public interface ComponentsContainer extends Component {
 	 * 
 	 * @return
 	 */
-	List<Component> getContent();
+	List<NestedElements> getContent();
 
 }

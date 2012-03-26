@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
  * @author jhuska
  *
  */
-public interface Component {
+public interface Component extends NestedElements  {
 
 	void setRoot(WebElement root);
 
