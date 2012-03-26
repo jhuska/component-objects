@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import cz.fi.muni.jhuska.bc.api.AbstractComponent;
+import cz.fi.muni.jhuska.bc.api.AbstractComponentMock;
 import cz.fi.muni.jhuska.bc.api.Factory;
 import cz.fi.muni.jhuska.bc.ftest.AbstractTest;
 

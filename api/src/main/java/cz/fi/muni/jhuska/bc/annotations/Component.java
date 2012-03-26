@@ -7,21 +7,21 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ReferencedBy {
-	
-	String clazz() default "";
-	
+public @interface Component {
+
+	String className() default "";
+
 	String css() default "";
-	
+
 	String id() default "";
-	
+
 	String linkText() default "";
-	
+
 	String name() default "";
-	
+
 	String partialLinkText() default "";
-	
+
 	String tagName() default "";
-	
-	String xPath() default "";
+
+	String xpath() default "";
 }

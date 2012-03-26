@@ -2,21 +2,19 @@ package cz.fi.muni.jhuska.bc.unit.test;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
-
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import cz.fi.muni.jhuska.bc.api.AbstractComponent;
+import cz.fi.muni.jhuska.bc.api.AbstractComponentMock;
 import cz.fi.muni.jhuska.bc.api.Factory;
 
 public class TestFactoryClass {

@@ -23,8 +23,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import cz.fi.muni.jhuska.bc.api.CalendarComponent;
-import cz.fi.muni.jhuska.bc.api.CalendarPopupComponent;
+import cz.fi.muni.jhuska.bc.annotations.Component;
 import cz.fi.muni.jhuska.bc.api.CalendarPopupComponent.CalendarDay;
 import cz.fi.muni.jhuska.bc.api.CalendarPopupComponent.CalendarWeek;
 import cz.fi.muni.jhuska.bc.api.Factory;
@@ -34,8 +33,8 @@ import cz.fi.muni.jhuska.bc.impl.CalendarPopupComponentImpl;
 
 public class TestCalendarComponent extends AbstractTest {
 
-    // @FindBy(xpath = "//td[@class='ecol1']")
-    private CalendarPopupComponent calendar;
+	@Component
+	private CalendarPopupComponentImpl calendar;
 
     private final By CALENDAR_INPUT = By.className("rf-cal-inp");
     //do not forget also to set accordingly the model's date format
@@ -50,12 +49,7 @@ public class TestCalendarComponent extends AbstractTest {
     public static WebArchive deploy() {
         return createDeployment(TestCalendarComponent.class);
     }
-
-    @BeforeClass
-    public void initCalendar() {
-        calendar = Factory.initializeComponent(CalendarPopupComponentImpl.class);
-    }
-
+    
     @BeforeMethod
     public void resetCalendar() {
         calendarRoot = webDriver.findElement(By.xpath("//*[contains(@id, 'calendar')]"));
@@ -63,7 +57,7 @@ public class TestCalendarComponent extends AbstractTest {
     }
 
     @Test
-    public void testShowCalendar() {
+    public void testShowCalendar() { 
 
         WebElement popup = calendarRoot.findElement(By.className("rf-cal-day-lbl"));
         assertFalse(popup.isDisplayed(), "The popup should not be displayed yet, since it was not invoked!");
@@ -111,27 +105,13 @@ public class TestCalendarComponent extends AbstractTest {
     }
 
     @Test
-    public void testGetDate() {
-        Date date = calendar.getDate();
-        assertNull(date, "The returned date should be null, since no date was set before getting of the date!");
-
-        date = new Date( System.currentTimeMillis() );
-        calendar.gotoDate(date);
-        Date date1 = calendar.getDate();
-        
-        String inputValue = webDriver.findElement(CALENDAR_INPUT).getAttribute("value");
-        date = getDateFromString(inputValue);
-        assertEquals(date1, date, "The got date should be the same as the one which was set!");
-    }
-
-    @Test
     public void testGetDateTime() {
         DateTime dateTime = calendar.getDateTime();
         assertNull(dateTime,
             "The returned dateTime(joda time) should be null, since no dateTime was set before getting of the dateTime");
 
         DateTime dateTime1 = new DateTime(System.currentTimeMillis());
-        calendar.gotoDate(dateTime1);
+        calendar.gotoDateTime(dateTime1);
 
         String inputValue = webDriver.findElement(CALENDAR_INPUT).getText();
         dateTime = DateTime.parse(inputValue);
@@ -161,14 +141,14 @@ public class TestCalendarComponent extends AbstractTest {
         cal.roll(Calendar.YEAR, yearShift);
         cal.roll(Calendar.MONTH, false);
         date1 = cal.getTime();
+        DateTime dateTime = new DateTime(date1);
         
-    	calendar.gotoDate(date1);
+    	calendar.gotoDateTime(dateTime);
 
         String inputValue = webDriver.findElement(CALENDAR_INPUT).getAttribute("value");
         Date date2 = getDateFromString(inputValue);
         Calendar cal2 = new GregorianCalendar();
         cal2.setTime(date2);
-        int foo = cal2.get(Calendar.YEAR);
         
         assertEquals( cal2.get(Calendar.MONTH), cal.get(Calendar.MONTH), "The got date should be the same as the one which was set!");
         assertEquals( cal2.get(Calendar.YEAR), cal.get(Calendar.YEAR), "The got date should be the same as the one which was set!");
@@ -178,7 +158,7 @@ public class TestCalendarComponent extends AbstractTest {
     public void testGotoDateTime() {
         DateTime dateTime1 = new DateTime();
 
-        calendar.gotoDate(dateTime1);
+        calendar.gotoDateTime(dateTime1);
 
         String inputValue = webDriver.findElement(CALENDAR_INPUT).getText();
         DateTime dateTime2 = DateTime.parse(inputValue);
@@ -188,8 +168,9 @@ public class TestCalendarComponent extends AbstractTest {
     @Test
     public void testGotoDateByMouse() {
         Date date1 = new Date(System.currentTimeMillis());
-
-        calendar.gotoDate(date1, ScrollingType.BY_MOUSE);
+        DateTime dateTime = new DateTime(date1);
+        
+        calendar.gotoDateTime(dateTime, ScrollingType.BY_MOUSE);
 
         String inputValue = webDriver.findElement(CALENDAR_INPUT).getText();
         Date date2 = getDateFromString(inputValue);
@@ -200,7 +181,7 @@ public class TestCalendarComponent extends AbstractTest {
     public void testGotoDateTimeByMouse() {
         DateTime dateTime1 = new DateTime();
 
-        calendar.gotoDate(dateTime1, ScrollingType.BY_MOUSE);
+        calendar.gotoDateTime(dateTime1, ScrollingType.BY_MOUSE);
 
         String inputValue = webDriver.findElement(CALENDAR_INPUT).getText();
         DateTime dateTime2 = DateTime.parse(inputValue);
@@ -211,7 +192,7 @@ public class TestCalendarComponent extends AbstractTest {
     public void testGotoDateByKeys() {
 
         try {
-            calendar.gotoDate(new Date(), ScrollingType.BY_KEYS);
+            calendar.gotoDateTime(new DateTime(), ScrollingType.BY_KEYS);
             fail("The IllegalArgumentException should be thrown, since RichFaces calendar does not support "
                 + ScrollingType.BY_KEYS);
         } catch (IllegalArgumentException ex) {
@@ -223,7 +204,7 @@ public class TestCalendarComponent extends AbstractTest {
     public void testGotoDateTimeByKeys() {
 
         try {
-            calendar.gotoDate(new DateTime(), ScrollingType.BY_KEYS);
+            calendar.gotoDateTime(new DateTime(), ScrollingType.BY_KEYS);
             fail("The IllegalArgumentException should be thrown, since RichFaces calendar does not support "
                 + ScrollingType.BY_KEYS);
         } catch (IllegalArgumentException ex) {
@@ -274,7 +255,7 @@ public class TestCalendarComponent extends AbstractTest {
 
         int expectedDay = 10;
         cal1.set(2012, 2, expectedDay);
-        calendar.gotoDate(cal1.getTime());
+        calendar.gotoDateTime( new DateTime(cal1.getTime()) );
         day = calendar.getDayOfMonth();
 
         assertEquals(day.toInt(), expectedDay, "The returned day is wrong!");
@@ -298,7 +279,7 @@ public class TestCalendarComponent extends AbstractTest {
         assertEquals(days.size(), cal1.getActualMaximum(Calendar.DAY_OF_MONTH));
 
         cal1.set(2012, 2, 1);
-        calendar.gotoDate(cal1.getTime());
+        calendar.gotoDateTime( new DateTime(cal1.getTime()) );
 
         days = calendar.getDaysOfMonth();
         assertNotNull(days, "It should not return null, it should return number of days of the month in date " + cal1.getTime());
@@ -320,7 +301,7 @@ public class TestCalendarComponent extends AbstractTest {
 
         int expectedWeek = 1;
         cal1.set(2012, 1, expectedWeek);
-        calendar.gotoDate(cal1.getTime());
+        calendar.gotoDateTime( new DateTime(cal1.getTime()) );
         week = calendar.getWeekOfYear();
 
         assertEquals(week.toInt(), expectedWeek, "The returned week is wrong!");
@@ -338,7 +319,7 @@ public class TestCalendarComponent extends AbstractTest {
 
         int expectedYear = 2011;
         cal1.set(expectedYear, 1, 1);
-        calendar.gotoDate(cal1.getTime());
+        calendar.gotoDateTime( new DateTime(cal1.getTime()) );
         week = calendar.getWeekOfYear(1);
 
         assertEquals(week.whichYear(), expectedYear, "The returned week is not a part of the correct year!");
@@ -356,7 +337,7 @@ public class TestCalendarComponent extends AbstractTest {
         assertEquals(weeks.size(), cal1.getActualMaximum(Calendar.WEEK_OF_YEAR));
 
         cal1.set(2012, 2, 1);
-        calendar.gotoDate(cal1.getTime());
+        calendar.gotoDateTime( new DateTime(cal1.getTime()) );
 
         weeks = calendar.getWeeksOfYear();
         assertNotNull(weeks,
@@ -375,7 +356,7 @@ public class TestCalendarComponent extends AbstractTest {
      */
     private void checkGotoPreviousMethods(int whatIsShifted) {
         Date date1 = new Date(System.currentTimeMillis());
-        calendar.gotoDate(date1);
+        calendar.gotoDateTime( new DateTime(date1) );
         java.util.Calendar cal1 = new GregorianCalendar();
         cal1.setTime(date1);
 
@@ -393,7 +374,7 @@ public class TestCalendarComponent extends AbstractTest {
                 throw new IllegalArgumentException("Wrong value of what will be shifted, it is not a day or month or year");
         }
 
-        Date date2 = calendar.getDate();
+        Date date2 = calendar.getDateTime().toDate();
         java.util.Calendar cal2 = new GregorianCalendar();
         cal2.setTime(date2);
 
@@ -420,7 +401,7 @@ public class TestCalendarComponent extends AbstractTest {
     private void checkGotoNextMethods(int whatIsShifted) {
 
         Date date1 = new Date(System.currentTimeMillis());
-        calendar.gotoDate(date1);
+        calendar.gotoDateTime( new DateTime(date1) );
         java.util.Calendar cal1 = new GregorianCalendar();
         cal1.setTime(date1);
 
@@ -438,7 +419,7 @@ public class TestCalendarComponent extends AbstractTest {
                 throw new IllegalArgumentException("Wrong value of what will be shifted, it is not a day or month or year");
         }
 
-        Date date2 = calendar.getDate();
+        Date date2 = calendar.getDateTime().toDate();
         java.util.Calendar cal2 = new GregorianCalendar();
         cal2.setTime(date2);
 

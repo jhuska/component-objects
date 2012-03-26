@@ -35,6 +35,15 @@ public interface DataTableComponent extends Component {
 	 * @return
 	 */
 	int getNumberOfRows();
+	
+	/**
+	 * <p>
+	 * Returns total number of cells in this particular table.
+	 * </p>
+	 * 
+	 * @return
+	 */
+	int getNumberOfCells();
 
 	/**
 	 * <p>
