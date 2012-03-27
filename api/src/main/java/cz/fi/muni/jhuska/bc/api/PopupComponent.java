@@ -13,7 +13,7 @@ package cz.fi.muni.jhuska.bc.api;
  * @author jhuska
  * 
  */
-public interface PopupComponent extends ComponentsContainer {
+public interface PopupComponent<T> extends ComponentsContainer {
 
 	/**
 	 * Returns whether this popup is visible.

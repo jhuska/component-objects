@@ -14,7 +14,7 @@ import java.util.List;
  * @author jhuska
  * 
  */
-public interface AutocompleteComponent extends Component {
+public interface AutocompleteComponent extends Component {//TODO mal by byt genericky podla toho aky ma typ v suggestion
 
 	/**
 	 * Determines whether the suggestion list is visible, that is whether there
@@ -113,7 +113,7 @@ public interface AutocompleteComponent extends Component {
 	 *         which was rendered during sequentially typing of the param
 	 *         <code>string</code>
 	 */
-	List<List<String>> typeCharByChar(String string);
+	List<List<String>> typeCharByChar(String string);//TODO premysliet ci nieje zbytocna - zbytocne zlozita, mapa - kluc pismeno - hodnota suggestion
 
 	/**
 	 * <p>

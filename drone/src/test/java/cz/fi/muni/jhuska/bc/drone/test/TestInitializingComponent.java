@@ -14,8 +14,8 @@ import cz.fi.muni.jhuska.bc.drone.Enricher;
 
 public class TestInitializingComponent extends Arquillian {
 
-	@Component
-	AbstractComponentMock abstractComponent;
+	@Component//mozno nahradit finby
+	AbstractComponentMock abstractComponent;//radsej stub pozret
 
 	@Deployment(testable = false)
 	public static WebArchive deploy() {

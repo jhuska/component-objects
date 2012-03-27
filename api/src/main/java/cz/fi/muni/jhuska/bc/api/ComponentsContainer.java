@@ -9,7 +9,7 @@ import java.util.List;
  * @author jhuska
  * 
  */
-public interface ComponentsContainer<T extends NestedElements> extends Component {
+public interface ComponentsContainer<T> extends Component {
 
 	/**
 	 * Returns the content of the popup, in other words List containing all
