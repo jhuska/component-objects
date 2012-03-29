@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import cz.fi.muni.jhuska.bc.api.AbstractComponent;
-import cz.fi.muni.jhuska.bc.api.AbstractComponentMock;
+import cz.fi.muni.jhuska.bc.api.AbstractComponentStub;
 import cz.fi.muni.jhuska.bc.api.Factory;
 import cz.fi.muni.jhuska.bc.ftest.AbstractTest;
 
@@ -27,19 +27,19 @@ public class TestSettingRootAndReferenced extends AbstractTest {
 
     @BeforeClass
     public void initComponents() {
-        abstractComponent = Factory.initializeComponent(AbstractComponentMock.class);
+        abstractComponent = Factory.initializeComponent(AbstractComponentStub.class);
     }
 
     @Test
     public void testSettingRoot() {
         abstractComponent.setRoot(webDriver.findElement(By.xpath("//*[contains(@id,'root1')]")));
 
-        assertEquals(((AbstractComponentMock) abstractComponent).invokeMethodOnElementRefByName(), TEXT_FIRST_ROOT_ANCHOR,
+        assertEquals(((AbstractComponentStub) abstractComponent).invokeMethodOnElementRefByName(), TEXT_FIRST_ROOT_ANCHOR,
             "The text from first nested element is wrong!");
 
         abstractComponent.setRoot(webDriver.findElement(By.xpath("//*[contains(@id,'root2')]")));
 
-        assertEquals(((AbstractComponentMock) abstractComponent).invokeMethodOnElementRefByName(), TEXT_SECOND_ROOT_ANCHOR,
+        assertEquals(((AbstractComponentStub) abstractComponent).invokeMethodOnElementRefByName(), TEXT_SECOND_ROOT_ANCHOR,
             "The text from second nested element is wrong!");
     }
 }

@@ -9,13 +9,13 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
 
 import cz.fi.muni.jhuska.bc.annotations.Component;
-import cz.fi.muni.jhuska.bc.api.AbstractComponentMock;
+import cz.fi.muni.jhuska.bc.api.AbstractComponentStub;
 import cz.fi.muni.jhuska.bc.drone.Enricher;
 
 public class TestInitializingComponent extends Arquillian {
 
 	@Component//mozno nahradit finby
-	AbstractComponentMock abstractComponent;//radsej stub pozret
+	AbstractComponentStub abstractComponent;//radsej stub pozret
 
 	@Deployment(testable = false)
 	public static WebArchive deploy() {

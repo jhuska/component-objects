@@ -14,7 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import cz.fi.muni.jhuska.bc.api.AbstractComponent;
-import cz.fi.muni.jhuska.bc.api.AbstractComponentMock;
+import cz.fi.muni.jhuska.bc.api.AbstractComponentStub;
 import cz.fi.muni.jhuska.bc.api.Factory;
 
 public class TestFactoryClass {
@@ -26,7 +26,7 @@ public class TestFactoryClass {
 
     @BeforeMethod
     public void initializeMocks() {
-        abstrComponent = Factory.initializeComponent(AbstractComponentMock.class);
+        abstrComponent = Factory.initializeComponent(AbstractComponentStub.class);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class TestFactoryClass {
 
     @Test
     public void testIsRootInitialized() {
-        assertNotNull(((AbstractComponentMock) abstrComponent).getRootProxy(), "Root should be initialized!");
+        assertNotNull(((AbstractComponentStub) abstrComponent).getRootProxy(), "Root should be initialized!");
     }
 
     @Test
@@ -50,21 +50,21 @@ public class TestFactoryClass {
     @Test
     public void testMethodInvocationOnRoot() {
         try {
-            ((AbstractComponentMock) abstrComponent).invokeMethodOnRoot();
+            ((AbstractComponentStub) abstrComponent).invokeMethodOnRoot();
             fail("The runtime exception should be thrown, since root is not set and you are invoking a method on it!");
         } catch (RuntimeException ex) {
             // expected
         }
 
         setRoot();
-        assertEquals(((AbstractComponentMock) abstrComponent).invokeMethodOnRoot(), ROOT_METHOD_RETURN_VAL,
+        assertEquals(((AbstractComponentStub) abstrComponent).invokeMethodOnRoot(), ROOT_METHOD_RETURN_VAL,
             "The return value of method invoked on root element is wrong!");
     }
 
     @Test
     public void testMethodInvocationOnReferencedElement() {
         try {
-            ((AbstractComponentMock) abstrComponent).invokeMethodOnElementRefByClass();
+            ((AbstractComponentStub) abstrComponent).invokeMethodOnElementRefByClass();
             fail("The RuntimeException should be thrown, since you have invoked method on element which referenced from root, and you have not set the root!");
         } catch (RuntimeException ex) {
             // OK
@@ -80,7 +80,7 @@ public class TestFactoryClass {
 //            }
 //        })
 
-        assertEquals(((AbstractComponentMock) abstrComponent).invokeMethodOnElementRefByClass(),
+        assertEquals(((AbstractComponentStub) abstrComponent).invokeMethodOnElementRefByClass(),
             REF_BY_CLASS_METHOD_RETURN_VAL, "The method onvoked on referenced element returned wrong value!");
     }
 

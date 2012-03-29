@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import cz.fi.muni.jhuska.bc.api.AbstractComponent;
-import cz.fi.muni.jhuska.bc.api.AbstractComponentMock;
+import cz.fi.muni.jhuska.bc.api.AbstractComponentStub;
 import cz.fi.muni.jhuska.bc.api.Factory;
 import cz.fi.muni.jhuska.bc.ftest.AbstractTest;
 
@@ -34,7 +34,7 @@ public class TestReferencedBy extends AbstractTest {
     
     @BeforeClass
     public void initComponent() {
-        abstractComponentMock = Factory.initializeComponent(AbstractComponentMock.class);
+        abstractComponentMock = Factory.initializeComponent(AbstractComponentStub.class);
     }
     
     @BeforeMethod
@@ -44,49 +44,49 @@ public class TestReferencedBy extends AbstractTest {
     
     @Test
     public void testReferencedByClassName() {
-        String actualTextValue = ((AbstractComponentMock)abstractComponentMock).invokeMethodOnElementRefByClass();
+        String actualTextValue = ((AbstractComponentStub)abstractComponentMock).invokeMethodOnElementRefByClass();
         assertEquals(actualTextValue, TEXT_VALUE_REF_BY_CLASS_NAME); 
     }
     
     @Test
     public void testReferencedById() {
-        String actualTextValue = ((AbstractComponentMock)abstractComponentMock).invokeMethodOnElementRefById();
+        String actualTextValue = ((AbstractComponentStub)abstractComponentMock).invokeMethodOnElementRefById();
         assertEquals(actualTextValue, TEXT_VALUE_REF_BY_ID);
     }
     
     @Test
     public void testReferencedByCSS() {
-        String actualTextValue = ((AbstractComponentMock)abstractComponentMock).invokeMethodOnElementRefByCSS();
+        String actualTextValue = ((AbstractComponentStub)abstractComponentMock).invokeMethodOnElementRefByCSS();
         assertEquals(actualTextValue, TEXT_VALUE_REF_BY_CSS);
     }
     
     @Test
     public void testReferencedByName() {
-        String actualTextValue = ((AbstractComponentMock)abstractComponentMock).invokeMethodOnElementRefByName();
+        String actualTextValue = ((AbstractComponentStub)abstractComponentMock).invokeMethodOnElementRefByName();
         assertEquals(actualTextValue, TEXT_VALUE_REF_BY_NAME);
     }
     
     @Test
     public void testReferencedByTagName() {
-        String actualTextValue = ((AbstractComponentMock)abstractComponentMock).invokeMethodOnElementRefByTagName();
+        String actualTextValue = ((AbstractComponentStub)abstractComponentMock).invokeMethodOnElementRefByTagName();
         assertEquals(actualTextValue, TEXT_VALUE_REF_BY_TAG_NAME);
     }
     
     @Test
     public void testReferencedByLinkText() {
-        String actualTextValue = ((AbstractComponentMock)abstractComponentMock).invokeMethodOnElementRefByLinkText();
+        String actualTextValue = ((AbstractComponentStub)abstractComponentMock).invokeMethodOnElementRefByLinkText();
         assertEquals(actualTextValue, TEXT_VALUE_REF_BY_LINK_TEXT);
     }
     
     @Test
     public void testReferencedByPartialLinkText() {
-        String actualTextValue = ((AbstractComponentMock)abstractComponentMock).invokeMethodOnElementRefByPartialLinkText();
+        String actualTextValue = ((AbstractComponentStub)abstractComponentMock).invokeMethodOnElementRefByPartialLinkText();
         assertEquals(actualTextValue, TEXT_VALUE_REF_BY_PARTIAL_LINK_TEXT);
     }
     
     @Test
     public void testReferencedByXPath() {
-        String actualTextValue = ((AbstractComponentMock)abstractComponentMock).invokeMethodOnElementRefByXpath();
+        String actualTextValue = ((AbstractComponentStub)abstractComponentMock).invokeMethodOnElementRefByXpath();
         assertEquals(actualTextValue, TEXT_VALUE_REF_BY_XPATH);
     }
 }

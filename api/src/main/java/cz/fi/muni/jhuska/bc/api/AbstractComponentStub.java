@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import cz.fi.muni.jhuska.bc.annotations.Root;
 import cz.fi.muni.jhuska.bc.api.AbstractComponent;
 
-public class AbstractComponentMock extends AbstractComponent {
+public class AbstractComponentStub extends AbstractComponent {
 
 	@Root
 	private WebElement root;
