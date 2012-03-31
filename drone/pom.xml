@@ -17,13 +17,6 @@
 			<groupId>cz.jhuska.bachelor.thesis</groupId>
 			<artifactId>bachelor-thesis-api</artifactId>
 			<version>${project.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>cz.jhuska.bachelor.thesis</groupId>
-			<artifactId>bachelor-thesis-api</artifactId>
-			<version>${project.version}</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>cz.jhuska.bachelor.thesis</groupId>
@@ -66,6 +59,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-drone-webdriver</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.jboss.arquillian.testng</groupId>
 			<artifactId>arquillian-testng-container</artifactId>
 			<scope>test</scope>
@@ -74,9 +72,12 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 		</dependency>
+
+		<!-- Arquillian Graphene -->
 		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
+			<groupId>org.jboss.arquillian.graphene</groupId>
+			<artifactId>graphene-webdriver</artifactId>
+			<type>pom</type>
 		</dependency>
 	</dependencies>
 
