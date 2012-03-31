@@ -19,21 +19,19 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.BeforeClass;
+import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import cz.fi.muni.jhuska.bc.annotations.Component;
 import cz.fi.muni.jhuska.bc.api.CalendarPopupComponent.CalendarDay;
 import cz.fi.muni.jhuska.bc.api.CalendarPopupComponent.CalendarWeek;
-import cz.fi.muni.jhuska.bc.api.Factory;
 import cz.fi.muni.jhuska.bc.api.ScrollingType;
 import cz.fi.muni.jhuska.bc.ftest.AbstractTest;
 import cz.fi.muni.jhuska.bc.impl.CalendarPopupComponentImpl;
 
 public class TestCalendarComponent extends AbstractTest {
 
-	@Component
+	@FindBy
 	private CalendarPopupComponentImpl calendar;
 
     private final By CALENDAR_INPUT = By.className("rf-cal-inp");
