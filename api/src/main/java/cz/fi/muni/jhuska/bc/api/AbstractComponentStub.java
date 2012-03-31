@@ -29,7 +29,7 @@ public class AbstractComponentStub extends AbstractComponent {
 	@FindBy(partialLinkText = "partiaLinkTextRef")
 	private WebElement locatorRefByPartialLinkText;
 
-	@FindBy(xpath = "xpathRef")
+	@FindBy(xpath = "//div[@class='refByXpath']")
 	private WebElement locatorRefByXPath;
 
 	@FindBy(css = "cssSelectorRef")
