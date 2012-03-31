@@ -122,7 +122,7 @@ public class Factory {
      * can I do it in better way ?to iterate over all annotations methods and invoke them on what ?obviously it is not possible
      * to invoke it on annotation, since it can not be instantiated
      */
-    private static By getReferencedBy(FindBy findByAnnotation) {
+    public static By getReferencedBy(FindBy findByAnnotation) {
         String value = null;
 
         value = findByAnnotation.className().trim();
