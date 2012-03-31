@@ -52,7 +52,7 @@ public class Enricher implements TestEnricher {
 							public Object invoke(Object proxy, Method method,
 									Object[] args) throws Throwable {
 								
-								WebDriver driver = GrapheneContext.get();
+								WebDriver driver = GrapheneContext.getProxy();
 								WebElement root =  driver.findElement(by);
 								
 								return (Object) method.invoke(root, args);
