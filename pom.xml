@@ -16,6 +16,7 @@
 
 	<properties>
 		<testng.version>5.14.6</testng.version>
+		<version.junit>4.10</version.junit>
 		<jodatime.version>2.0</jodatime.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,14 +24,15 @@
 
 		<version.arquillian.core>1.0.0.CR7</version.arquillian.core>
 		<version.arquillian.drone>1.0.0.CR3</version.arquillian.drone>
+		<version.arquillian.graphene>2.0.0-SNAPSHOT</version.arquillian.graphene>
 
 		<version.selenium>2.0rc2</version.selenium>
-		<version.selenium.java>2.19.0</version.selenium.java>
-		<version.selenium.server>2.19.0</version.selenium.server>
+		<version.selenium.java>2.20.0</version.selenium.java>
+		<version.selenium.server>2.20.0</version.selenium.server>
 
 		<org.richfaces.bom.version>4.1.0.Final</org.richfaces.bom.version>
-		
-		<jbossas7.version>7.1.0.Final</jbossas7.version>
+
+		<jbossas7.version>7.1.1.Final</jbossas7.version>
 	</properties>
 
 	<dependencyManagement>
@@ -87,6 +89,28 @@
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-server</artifactId>
 				<version>${version.selenium.server}</version>
+			</dependency>
+
+			<!-- Arquillian Graphene -->
+			<dependency>
+				<groupId>org.jboss.arquillian.graphene</groupId>
+				<artifactId>graphene-webdriver</artifactId>
+				<type>pom</type>
+				<version>${version.arquillian.graphene}</version>
+			</dependency>
+
+			<!-- Arquillian JUnit -->
+			<dependency>
+				<groupId>org.jboss.arquillian.junit</groupId>
+				<artifactId>arquillian-junit-standalone</artifactId>
+				<version>${version.arquillian.graphene}</version>
+			</dependency>
+
+			<!-- JUnit -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${version.junit}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

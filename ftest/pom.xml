@@ -12,19 +12,6 @@
 	<artifactId>bachelor-thesis-ftest</artifactId>
 
 	<dependencies>
-		<!-- Runtime dependencies 
-		<dependency>
-			<groupId>cz.jhuska.bachelor.thesis</groupId>
-			<artifactId>bachelor-thesis-impl</artifactId>
-			<version>${project.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>cz.jhuska.bachelor.thesis</groupId>
-			<artifactId>bachelor-thesis-api</artifactId>
-			<version>${project.version}</version>
-			<scope>test</scope>
-		</dependency>-->
 		<dependency>
 			<groupId>cz.jhuska.bachelor.thesis</groupId>
 			<artifactId>bachelor-thesis-drone</artifactId>
@@ -70,14 +57,6 @@
 			<groupId>org.jboss.arquillian.testng</groupId>
 			<artifactId>arquillian-testng-container</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
 		</dependency>
 		<!-- RichFaces Dependencies -->
 		<dependency>
