@@ -14,7 +14,7 @@ import java.util.List;
  * @author jhuska
  * 
  */
-public interface AutocompleteComponent extends Component {//TODO mal by byt genericky podla toho aky ma typ v suggestion
+public interface AutocompleteComponent<T> extends Component {//TODO mal by byt genericky podla toho aky ma typ v suggestion
 
 	/**
 	 * Determines whether the suggestion list is visible, that is whether there
@@ -30,7 +30,7 @@ public interface AutocompleteComponent extends Component {//TODO mal by byt gene
 	 * 
 	 * @return all suggestions
 	 */
-	List<Suggestion> getAllSuggestions();
+	List<Suggestion<T>> getAllSuggestions();
 
 	/**
 	 * <p>
@@ -42,42 +42,42 @@ public interface AutocompleteComponent extends Component {//TODO mal by byt gene
 	 * </p>
 	 * <p>
 	 * If the requested number of suggestions is bigger than the actual number
-	 * of suggestions, then the missed suggestions are replaced by null value
+	 * of suggestions, then only available suggestions are returned.
 	 * </p>
 	 * 
 	 * @return
 	 */
-	List<Suggestion> getFirstNSuggestions(int n);
+	List<Suggestion<T>> getFirstNSuggestions(int n);
 
 	/**
-	 * Returns the first suggestion if available, that is the most accurate
+	 * Returns the first suggestion if available, that is the top
 	 * suggestion from the list of suggestions. If there are no suggestions null
 	 * is returned.
 	 * 
 	 * @return the first suggestion from the list of suggestions, of no
 	 *         suggestions available null is returned
 	 */
-	Suggestion getFirstSuggestion();
+	Suggestion<T> getFirstSuggestion();
 
 	/**
 	 * Returns the suggestion which is in order determined by param
-	 * <code>order</code>. If there is no so many suggestion or none, then null
+	 * <code>order</code>. If there is no so many suggestions, then null
 	 * is returned.
 	 * 
 	 * @param order
 	 * @return
 	 */
-	Suggestion getNthSuggestion(int order);
+	Suggestion<T> getNthSuggestion(int order);
 
 	/**
 	 * <p>
-	 * Types to the autocomplete input the provided string at once and returns
+	 * Types to the autocomplete input the provided string and returns
 	 * the suggestions if provided.
 	 * </p>
 	 * <p>
 	 * That is it types the whole string value of param <code>string</code> to
 	 * the input on which the autocomplete function is binded and returns all
-	 * provided suggestions, if there are no suggestions empty list is returned.
+	 * provided suggestions, if there are no suggestions, empty list is returned.
 	 * </p>
 	 * 
 	 * @param string
@@ -86,34 +86,7 @@ public interface AutocompleteComponent extends Component {//TODO mal by byt gene
 	 * @return list with all provided suggestions, if there are no suggestions
 	 *         after typing empty list is returned
 	 */
-	List<Suggestion> typeAtOnce(String string);
-
-	/**
-	 * <p>
-	 * Types the provided string to the autocomplete input,but character by
-	 * character, and when there are suggestions, they are saved in separated
-	 * lists and then returned wrapped into one list.
-	 * </p>
-	 * <p>
-	 * That is when you provide for example string - Blah, then the char B is
-	 * typed, and all suggestions are saved in one list, then it types char l
-	 * and all other (even when they are repeated) suggestions are saved in
-	 * second list, and so forth. When whole param is typed then all this lists
-	 * are saved and returned as one list.
-	 * </p>
-	 * <p>
-	 * If there are some characters of the provided string, which do not
-	 * provided any suggestion when they are typed, then their suggestions are
-	 * replaced by null value.
-	 * 
-	 * @param string
-	 *            the string which will be typed sequentially into autocomplete
-	 *            input
-	 * @return list of lists of <code>Suggestions</code> with all suggestions
-	 *         which was rendered during sequentially typing of the param
-	 *         <code>string</code>
-	 */
-	List<List<String>> typeCharByChar(String string);//TODO premysliet ci nieje zbytocna - zbytocne zlozita, mapa - kluc pismeno - hodnota suggestion
+	List<Suggestion<T>> typeAtOnce(String string);
 
 	/**
 	 * <p>
@@ -159,13 +132,20 @@ public interface AutocompleteComponent extends Component {//TODO mal by byt gene
 	 * 
 	 * @author jhuska
 	 */
-	public interface Suggestion {
+	public interface Suggestion<T> {
 
 		/**
-		 * Returns the string representation of this suggestion.
+		 * Returns the value of generic type of this suggestion
 		 * 
 		 * @return
 		 */
-		String getValue();
+		T getValue();
+		
+		/**
+		 * Returns the value of the input for which this suggestion was offered.
+		 * 
+		 * @return
+		 */
+		String getInput();
 	}
 }
