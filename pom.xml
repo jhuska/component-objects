@@ -23,7 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<version.arquillian.core>1.0.0.CR7</version.arquillian.core>
-		<version.arquillian.drone>1.0.0.CR3</version.arquillian.drone>
+		<version.arquillian.drone>1.0.0.CR4</version.arquillian.drone>
 		<version.arquillian.graphene>2.0.0-SNAPSHOT</version.arquillian.graphene>
 
 		<version.selenium>2.0rc2</version.selenium>
