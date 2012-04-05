@@ -17,23 +17,32 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import cz.fi.muni.jhuska.bc.annotations.Page;
 import cz.fi.muni.jhuska.bc.api.AbstractComponentStub;
+import cz.fi.muni.jhuska.bc.drone.test.page.TestPage;
 
 public class TestInitializingComponent extends Arquillian {
 
 	@FindBy(xpath = "//div[@id='rootElement']")
-	AbstractComponentStub abstractComponent;
+	private AbstractComponentStub abstractComponent;
 	
 	@FindBy(xpath = "//div[@id='rootElement']")
-	WebElement element;
+	private WebElement element;
+	
+	@FindBy(xpath="//input")
+	private WebElement input;
+	
+	@Page
+	private TestPage testPage;
 
 	private final String EXPECTED_NESTED_ELEMENT_TEXT = "Some Value";
 
 	@Drone
-	WebDriver driver;
+	WebDriver selenium;
 
 	@ArquillianResource
 	protected URL contextRoot;
@@ -46,11 +55,6 @@ public class TestInitializingComponent extends Arquillian {
 				.addAsWebResource(new File(WEB_APP_SRC + "/index.html"),
 						ArchivePaths.create("index.html"));
 	}
-	
-	@BeforeMethod
-	public void initGrapheneContext() {
-		GrapheneContext.set(driver);
-	}
 
 	@Test
 	public void testComponentIsInitialized() {
@@ -60,10 +64,13 @@ public class TestInitializingComponent extends Arquillian {
 
 	@Test
 	public void testComponentHasSetRootCorrectly() {
-		driver.get(contextRoot + "index.html");
+		selenium.get(contextRoot + "index.html");
 
 		assertEquals(abstractComponent.invokeMethodOnElementRefByXpath(),
 				EXPECTED_NESTED_ELEMENT_TEXT, "The root was not set correctly!");
+		
+		input.sendKeys("Gooseka");
+		input.sendKeys("\b");
+		
 	}
-
 }
