@@ -14,7 +14,7 @@ import java.util.List;
  * @author jhuska
  * 
  */
-public interface AutocompleteComponent<T> extends Component {//TODO mal by byt genericky podla toho aky ma typ v suggestion
+public interface AutocompleteComponent<T> extends Component {
 
 	/**
 	 * Determines whether the suggestion list is visible, that is whether there
@@ -25,6 +25,31 @@ public interface AutocompleteComponent<T> extends Component {//TODO mal by byt g
 	boolean areSuggestionsAvailable();
 
 	/**
+	 * Clears the input using of the method determined by the given parameter.
+	 * 
+	 * @param clearType
+	 */
+	void clear(ClearType clearType);
+
+	public enum ClearType {
+
+		DELETE, BACKSPACE, ESCAPE_SQ
+	}
+
+	/**
+	 * <p>
+	 * Finishes the filling in the input, that is, it closes suggestion list if
+	 * there is any.
+	 * </p>
+	 * <p>
+	 * In other words it fill in the input without a need to autocomplete with
+	 * any suggestion. It is handy when there are no suggestions available and
+	 * user wants to fill in the input nevertheless.
+	 * </p>
+	 */
+	void finish();
+
+	/**
 	 * Returns all suggestions available, also these which need to be scrolled
 	 * down to be visible.
 	 * 
@@ -33,8 +58,84 @@ public interface AutocompleteComponent<T> extends Component {//TODO mal by byt g
 	List<Suggestion<T>> getAllSuggestions();
 
 	/**
+	 * Returns the selected suggestion. If the input is empty, or the value of
+	 * the input was not selected from suggestions (that is just typed there),
+	 * then null is returned.
+	 * 
+	 * @return
+	 */
+	Suggestion<T> getSelectedSuggestion();
+
+	/**
 	 * <p>
-	 * Returns first n suggestions, that is the the first n most accurate
+	 * Returns the selected suggestions from the input, the way of suggestions
+	 * separating is determined by the currently set separator.
+	 * </p>
+	 * <p>
+	 * Note that it does not return the values of the input which was not filled
+	 * in by choosing from the suggestion list. That is, it does not return the
+	 * values filled in directly.
+	 * </p>
+	 * 
+	 * @param regex
+	 * @return
+	 * @see #setSeparator(String)
+	 */
+	List<Suggestion<T>> getSelectedSuggestions();
+
+	/**
+	 * <p>
+	 * Returns the selected suggestions from the input, the way of suggestions
+	 * separating is determined by the given param <code>regex</code>
+	 * </p>
+	 * <p>
+	 * Note that it does not return the values of the input which was not filled
+	 * in by choosing from the suggestion list. That is, it does not return the
+	 * values filled in directly.
+	 * </p>
+	 * 
+	 * @param regex
+	 * @return
+	 */
+	List<Suggestion<T>> getSelectedSuggestions(String regex);
+
+	/**
+	 * Returns the value of the input.
+	 * 
+	 * @return
+	 */
+	String getInputValue();
+
+	/**
+	 * Returns the list of the input values, the values are separated according
+	 * to the currently set separator, or when separator is not set, then the
+	 * default one is space.
+	 * 
+	 * @return
+	 * @see #setSeparator(String)
+	 */
+	List<String> getInputValues();
+
+	/**
+	 * Returns the list of the input values, the values are separated in the
+	 * input according to the given param <code>regex</code>
+	 * 
+	 * @param regex
+	 * @return
+	 */
+	List<String> getInputValues(String regex);
+
+	/**
+	 * Sets the separator of the input values. This separator is then used when
+	 * retrieving input values.
+	 * 
+	 * @param regex
+	 */
+	void setSeparator(String regex);
+
+	/**
+	 * <p>
+	 * Returns first n suggestions, that is the the first n most top
 	 * suggestions, if there are some available.
 	 * </p>
 	 * <p>
@@ -50,9 +151,9 @@ public interface AutocompleteComponent<T> extends Component {//TODO mal by byt g
 	List<Suggestion<T>> getFirstNSuggestions(int n);
 
 	/**
-	 * Returns the first suggestion if available, that is the top
-	 * suggestion from the list of suggestions. If there are no suggestions null
-	 * is returned.
+	 * Returns the first suggestion if available, that is, the top suggestion
+	 * from the list of suggestions. If there are no suggestions, null is
+	 * returned.
 	 * 
 	 * @return the first suggestion from the list of suggestions, of no
 	 *         suggestions available null is returned
@@ -61,8 +162,9 @@ public interface AutocompleteComponent<T> extends Component {//TODO mal by byt g
 
 	/**
 	 * Returns the suggestion which is in order determined by param
-	 * <code>order</code>. If there is no so many suggestions, then null
-	 * is returned.
+	 * <code>order</code>. If there is no so many suggestions, then null is
+	 * returned. Note that the suggestions are ordered from the top of the
+	 * suggestion list.
 	 * 
 	 * @param order
 	 * @return
@@ -71,13 +173,14 @@ public interface AutocompleteComponent<T> extends Component {//TODO mal by byt g
 
 	/**
 	 * <p>
-	 * Types to the autocomplete input the provided string and returns
-	 * the suggestions if provided.
+	 * Types to the autocomplete input the provided string and returns the
+	 * suggestions if provided.
 	 * </p>
 	 * <p>
-	 * That is it types the whole string value of param <code>string</code> to
-	 * the input on which the autocomplete function is binded and returns all
-	 * provided suggestions, if there are no suggestions, empty list is returned.
+	 * That is it types the whole string value of the param <code>string</code>
+	 * to the input on which the autocomplete function is bound and returns all
+	 * provided suggestions. If there are no suggestions, empty list is
+	 * returned.
 	 * </p>
 	 * 
 	 * @param string
@@ -103,7 +206,7 @@ public interface AutocompleteComponent<T> extends Component {//TODO mal by byt g
 	 * @return true when it was successfully autocompleted by provided
 	 *         suggestion, false otherwise
 	 */
-	boolean autocompleteWithSuggestion(Suggestion sugg);
+	boolean autocompleteWithSuggestion(Suggestion<T> sugg);
 
 	/**
 	 * <p>
@@ -112,9 +215,9 @@ public interface AutocompleteComponent<T> extends Component {//TODO mal by byt g
 	 * param <code>scrollingType</code>
 	 * </p>
 	 * <p>
-	 * That is it chooses the suggestion from the list of available suggestions.
-	 * If that particular suggestion is not available, or there are no
-	 * suggestions at all, then it is just ignored, and false is returned.
+	 * That is, it chooses the suggestion from the list of available
+	 * suggestions. If that particular suggestion is not available, or there are
+	 * no suggestions at all, then it is just ignored, and false is returned.
 	 * </p>
 	 * 
 	 * @param sugg
@@ -124,28 +227,32 @@ public interface AutocompleteComponent<T> extends Component {//TODO mal by byt g
 	 * @return true when it was successfully autocompleted by provided
 	 *         suggestion, false otherwise
 	 */
-	boolean autocompleteWithSuggestion(Suggestion sugg,
+	boolean autocompleteWithSuggestion(Suggestion<T> sugg,
 			ScrollingType scrollingType);
 
 	/**
-	 * The suggestion provided by autocomplete function of particular input.
+	 * The suggestion provided by autocomplete function for particular input
+	 * value.
 	 * 
 	 * @author jhuska
 	 */
 	public interface Suggestion<T> {
 
 		/**
-		 * Returns the value of generic type of this suggestion
+		 * Returns the value of this suggestion.
 		 * 
 		 * @return
 		 */
 		T getValue();
-		
+
 		/**
-		 * Returns the value of the input for which this suggestion was offered.
+		 * <p>
+		 * Returns the list of inputs values, for which this suggestion was
+		 * offered.
+		 * </p>
 		 * 
 		 * @return
 		 */
-		String getInput();
+		List<String> getInput();
 	}
 }
