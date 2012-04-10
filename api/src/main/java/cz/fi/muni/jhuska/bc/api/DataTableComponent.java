@@ -35,7 +35,7 @@ public interface DataTableComponent extends Component {
 	 * @return
 	 */
 	int getNumberOfRows();
-	
+
 	/**
 	 * <p>
 	 * Returns total number of cells in this particular table.
@@ -67,7 +67,7 @@ public interface DataTableComponent extends Component {
 	 * @param column
 	 * @return
 	 */
-	Cell<NestedElements> getCell(Row<NestedElements> row, Column<NestedElements> column);
+	Cell getCell(Row row, Column column);
 
 	/**
 	 * Returns the list of all header cells, in other words the whole table
@@ -75,7 +75,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @return
 	 */
-	List<Header<NestedElements>> getTableHeader();
+	List<Header> getTableHeader();
 
 	/**
 	 * Returns the list of all footer cells, in other words the whole table
@@ -83,7 +83,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @return
 	 */
-	List<Footer<NestedElements>> getTableFooter();
+	List<Footer> getTableFooter();
 
 	/**
 	 * Returns the first row of the table, the header row if available, is not
@@ -91,7 +91,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @return
 	 */
-	Row<NestedElements> getFirstRow();
+	Row getFirstRow();
 
 	/**
 	 * Returns the last row of the table, the footer row if available, is not
@@ -99,7 +99,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @return
 	 */
-	Row<NestedElements> getLastRow();
+	Row getLastRow();
 
 	/**
 	 * Returns the first column of the table, the header column if available, is
@@ -107,7 +107,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @return
 	 */
-	Column<NestedElements> getFirstColumn();
+	Column getFirstColumn();
 
 	/**
 	 * Returns the last column of the table, the footer column if available, is
@@ -115,7 +115,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @return
 	 */
-	Column<NestedElements> getLastColumn();
+	Column getLastColumn();
 
 	/**
 	 * <p>
@@ -130,7 +130,7 @@ public interface DataTableComponent extends Component {
 	 *            the order of the row
 	 * @return the particular row, or null if it does not exist
 	 */
-	Row<NestedElements> getRow(int order);
+	Row getRow(int order);
 
 	/**
 	 * <p>
@@ -145,7 +145,7 @@ public interface DataTableComponent extends Component {
 	 *            the header of the requested row
 	 * @return the particular row, or null if it does not exist
 	 */
-	Row<NestedElements> getRow(Header<NestedElements> header);
+	Row getRow(Header header);
 
 	/**
 	 * <p>
@@ -161,7 +161,7 @@ public interface DataTableComponent extends Component {
 	 *            the order of the column
 	 * @return the particular column, or null if it does not exist
 	 */
-	Column<NestedElements> getColumn(int order);
+	Column getColumn(int order);
 
 	/**
 	 * <p>
@@ -176,21 +176,21 @@ public interface DataTableComponent extends Component {
 	 *            the header of requested column
 	 * @return the particular column, or null if it does not exist
 	 */
-	Column<NestedElements> getColumn(Header<NestedElements> header);
+	Column getColumn(Header header);
 
 	/**
 	 * Represents any part of the table.
 	 * 
 	 * @author jhuska
 	 */
-	public interface PartOfTable<T extends NestedElements> extends ComponentsContainer<NestedElements> {
+	public interface PartOfTable extends ComponentsContainer {
 
 		/**
 		 * Returns list with all cells from a particular table area
 		 * 
 		 * @return
 		 */
-		List<Cell<NestedElements>> getAllCells();
+		List<Cell> getAllCells();
 
 		/**
 		 * Returns the number of cells from particular table area
@@ -205,7 +205,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @author jhuska
 	 */
-	public interface Header<T extends NestedElements> extends PartOfTable<NestedElements> {
+	public interface Header extends PartOfTable {
 
 	}
 
@@ -214,7 +214,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @author jhuska
 	 */
-	public interface Footer<T extends NestedElements> extends PartOfTable<NestedElements> {
+	public interface Footer extends PartOfTable {
 
 	}
 
@@ -230,7 +230,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @author jhuska
 	 */
-	public interface Row<T extends NestedElements> extends PartOfTable<NestedElements> {
+	public interface Row extends PartOfTable {
 
 		/**
 		 * Sets the number of columns you want to have in this particular row.
@@ -253,7 +253,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @author jhuska
 	 */
-	public interface Column<T extends NestedElements> extends PartOfTable<NestedElements> {
+	public interface Column extends PartOfTable {
 
 		/**
 		 * <p>
@@ -271,11 +271,11 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @author jhuska
 	 */
-	public interface Cell<T extends NestedElements> extends PartOfTable<NestedElements> {
+	public interface Cell extends PartOfTable {
 		String getValue();
 
-		Row<NestedElements> whichRow();
+		Row whichRow();
 
-		Column<NestedElements> whichColumn();
+		Column whichColumn();
 	}
 }
