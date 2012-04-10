@@ -9,11 +9,9 @@ import java.util.List;
  * @author jhuska
  * 
  */
-public interface ComponentsContainer<T> extends Component {
+public interface ComponentsContainer extends Component {
 
 	/**
-	 * Returns the content of the popup, in other words List containing all
-	 * components from the particular popup.
 	 * 
 	 * @return
 	 */
