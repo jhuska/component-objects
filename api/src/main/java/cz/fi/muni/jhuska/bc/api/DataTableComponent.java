@@ -44,6 +44,22 @@ public interface DataTableComponent extends Component {
 	 * @return
 	 */
 	int getNumberOfCells();
+	
+	/**
+	 * 
+	 * @author jhuska
+	 *
+	 */
+	public interface Function {
+		
+		boolean accept(PartOfTable partOfTable);
+	}
+	
+	List<Cell> findCell(Function function);
+	
+	List<Column> findColumn(Function function);
+	
+	List<Row> findRow(Function function);
 
 	/**
 	 * <p>
