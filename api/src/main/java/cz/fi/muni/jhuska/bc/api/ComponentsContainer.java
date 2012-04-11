@@ -15,6 +15,6 @@ public interface ComponentsContainer extends Component {
 	 * 
 	 * @return
 	 */
-	List<NestedElements> getContent();
+	<T> List<NestedElements<T>> getContent();
 
 }
