@@ -7,6 +7,7 @@ package cz.fi.muni.jhuska.bc.api;
  * @author jhuska
  * 
  */
-public interface NestedElements {
+public interface NestedElements<T> {
 
+	T getValue();
 }
