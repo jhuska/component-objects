@@ -19,180 +19,177 @@ import org.openqa.selenium.support.FindBy;
 
 import cz.fi.muni.jhuska.bc.annotations.Page;
 import cz.fi.muni.jhuska.bc.api.AbstractComponent;
+import cz.fi.muni.jhuska.bc.api.AbstractPage;
 import cz.fi.muni.jhuska.bc.api.Factory;
 
 public class Enricher implements TestEnricher {
 
-	private static final String FIND_BY_ANNOTATION = "org.openqa.selenium.support.FindBy";
-	private static final String PAGE_ANNOTATION = "cz.fi.muni.jhuska.bc.annotations.Page";
+    private static final String FIND_BY_ANNOTATION = "org.openqa.selenium.support.FindBy";
+    private static final String PAGE_ANNOTATION = "cz.fi.muni.jhuska.bc.annotations.Page";
 
-	@Override
-	public void enrich(Object testCase) {
+    @Override
+    public void enrich(Object testCase) {
 
-		// at first initialize findBy annotations
-		if (ReflectionHelper.isClassPresent(FIND_BY_ANNOTATION)) {
+        // at first initialize findBy annotations
+        if (ReflectionHelper.isClassPresent(FIND_BY_ANNOTATION)) {
 
-			initFieldsAnnotatedByFindBy(testCase);
-		}
-		// initialize Page objects if there are any
-		if (ReflectionHelper.isClassPresent(PAGE_ANNOTATION)) {
+            initFieldsAnnotatedByFindBy(testCase);
+        }
+        // initialize Page objects if there are any
+        if (ReflectionHelper.isClassPresent(PAGE_ANNOTATION)) {
 
-			List<Field> fields = ReflectionHelper.getFieldsWithAnnotation(
-					testCase.getClass(), Page.class);
+            List<Field> fields = ReflectionHelper.getFieldsWithAnnotation(testCase.getClass(), Page.class);
 
-			initializePageObjectFields(fields);
-		}
-	}
+            initializePageObjectFields(testCase, fields);
+        }
+    }
 
-	private void initFieldsAnnotatedByFindBy(Object object) {
+    private void initFieldsAnnotatedByFindBy(Object object) {
 
-		// gets all fields with findBy annotations and then removes these
-		// which are not Components objects
-		List<Field> fields = ReflectionHelper.getFieldsWithAnnotation(
-				object.getClass(), FindBy.class);
+        // gets all fields with findBy annotations and then removes these
+        // which are not Components objects
+        List<Field> fields = ReflectionHelper.getFieldsWithAnnotation(object.getClass(), FindBy.class);
 
-		List<Field> copy = new ArrayList<Field>();
-		copy.addAll(fields);
+        List<Field> copy = new ArrayList<Field>();
+        copy.addAll(fields);
 
-		fields = removePlainFindBy(fields);
-		initComponentFields(fields, object);
+        fields = removePlainFindBy(fields);
+        initComponentFields(fields, object);
 
-		// initialize other non component Find By fields
-		copy.removeAll(fields);
-		initNotComponentFields(copy, object);
+        // initialize other non component Find By fields
+        copy.removeAll(fields);
+        initNotComponentFields(copy, object);
+    }
 
-	}
+    private void initializePageObjectFields(Object testCase, List<Field> fields) {
 
-	private void initializePageObjectFields(List<Field> fields) {
+        for (Field i : fields) {
 
-		for (Field i : fields) {
+            try {
+                Class declaredClass = Class.forName(i.getGenericType().toString().split(" ")[1]);
+                Object page = declaredClass.newInstance();
 
-			try {
-				Class declaredClass = i.getDeclaringClass();
-				Object page = declaredClass.newInstance();
+                List<Field> componentFields = ReflectionHelper.getFieldsWithAnnotation(declaredClass, FindBy.class);
 
-				List<Field> componentFields = ReflectionHelper
-						.getFieldsWithAnnotation(declaredClass, FindBy.class);
-				
-				initFieldsAnnotatedByFindBy(page);
-			} catch (Exception ex) {
-				throw new RuntimeException("Can not initialise Page Object!");
-			}
-		}
-	}
+                initFieldsAnnotatedByFindBy(page);
 
-	private void initNotComponentFields(List<Field> fields,
-			Object object) {
+                boolean accessible = i.isAccessible();
+                if (!accessible) {
+                    i.setAccessible(true);
+                }
+                i.set(testCase, page);
+                if (!accessible) {
+                    i.setAccessible(false);
+                }
+            } catch (Exception ex) {
+                throw new RuntimeException("Can not initialise Page Object!");
+            }
+        }
+    }
 
-		for (Field i : fields) {
+    private void initNotComponentFields(List<Field> fields, Object object) {
 
-			FindBy findBy = i.getAnnotation(FindBy.class);
-			final By by = Factory.getReferencedBy(findBy);
+        for (Field i : fields) {
 
-			WebElement element = setUpTheProxy(by);
+            FindBy findBy = i.getAnnotation(FindBy.class);
+            final By by = Factory.getReferencedBy(findBy);
 
-			setTheProxyToField(i, object, element);
-		}
-	}
+            WebElement element = setUpTheProxy(by);
 
-	private void setTheProxyToField(Field field, Object object,
-			Object elementOrComponent) {
+            setObjectToField(i, object, element);
+        }
+    }
 
-		boolean accessible = field.isAccessible();
-		if (!accessible) {
-			field.setAccessible(true);
-		}
-		try {
-			field.set(object, elementOrComponent);
-		} catch (Exception e) {
-			// TODO more grained
-			throw new RuntimeException(
-					"The components fields can not be initialised!");
-		}
-		if (!accessible) {
-			field.setAccessible(false);
-		}
-	}
+    private void setObjectToField(Field field, Object objectWithField, Object object) {
 
-	private WebElement setUpTheProxy(final By by) {
+        boolean accessible = field.isAccessible();
+        if (!accessible) {
+            field.setAccessible(true);
+        }
+        try {
+            field.set(objectWithField, object);
+        } catch (Exception e) {
+            // TODO more grained
+            throw new RuntimeException("The components fields can not be initialised!");
+        }
+        if (!accessible) {
+            field.setAccessible(false);
+        }
+    }
 
-		return (WebElement) Proxy.newProxyInstance(
-				WebElement.class.getClassLoader(),
-				new Class<?>[] { WebElement.class }, new InvocationHandler() {
+    private WebElement setUpTheProxy(final By by) {
 
-					@Override
-					public Object invoke(Object proxy, Method method,
-							Object[] args) throws Throwable {
+        return (WebElement) Proxy.newProxyInstance(WebElement.class.getClassLoader(), new Class<?>[] { WebElement.class },
+            new InvocationHandler() {
 
-						WebDriver driver = GrapheneContext.getProxy();
-						WebElement root = driver.findElement(by);
+                @Override
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-						return (Object) method.invoke(root, args);
-					}
-				});
-	}
+                    WebDriver driver = GrapheneContext.getProxy();
+                    WebElement root = driver.findElement(by);
 
-	private void initComponentFields(List<Field> fields, Object object) {
-		for (Field componentField : fields) {
+                    return (Object) method.invoke(root, args);
+                }
+            });
+    }
 
-			// initialise component
-			Class implementationClass = componentField.getType();
-			Object component = Factory.initializeComponent(implementationClass);
+    private void initComponentFields(List<Field> fields, Object object) {
+        for (Field componentField : fields) {
 
-			// sets the root of the component, retrieved from annotation
-			FindBy findBy = componentField.getAnnotation(FindBy.class);
-			final By by = Factory.getReferencedBy(findBy);
+            // initialise component
+            Class implementationClass = componentField.getType();
+            Object component = Factory.initializeComponent(implementationClass);
 
-			WebElement rootElement = setUpTheProxy(by);
-			((AbstractComponent) component).setRoot(rootElement);
+            // sets the root of the component, retrieved from annotation
+            FindBy findBy = componentField.getAnnotation(FindBy.class);
+            final By by = Factory.getReferencedBy(findBy);
 
-			setTheProxyToField(componentField, object, component);
-		}
+            WebElement rootElement = setUpTheProxy(by);
+            ((AbstractComponent) component).setRoot(rootElement);
 
-	}
+            setObjectToField(componentField, object, component);
+        }
 
-	/**
-	 * It removes all components from given list which does not extend the
-	 * <code>cz.fi.muni.jhuska.bc.api.AbstractComponent</code>
-	 * 
-	 * @param findByFields
-	 * @return
-	 */
-	private List<Field> removePlainFindBy(List<Field> findByFields) {
+    }
 
-		for (Iterator<Field> i = findByFields.iterator(); i.hasNext();) {
+    /**
+     * It removes all components from given list which does not extend the
+     * <code>cz.fi.muni.jhuska.bc.api.AbstractComponent</code>
+     * 
+     * @param findByFields
+     * @return
+     */
+    private List<Field> removePlainFindBy(List<Field> findByFields) {
 
-			try {
-				Field field = i.next();
+        for (Iterator<Field> i = findByFields.iterator(); i.hasNext();) {
 
-				Class clazz = Class.forName(field.getGenericType().toString()
-						.split(" ")[1]);
+            try {
+                Field field = i.next();
 
-				String superClass = null;
-				try {
-					superClass = (clazz.getGenericSuperclass().toString()
-							.split(" ")[1]);
-				} catch (NullPointerException ex) {
-					// it is ok in some cases, lets continue with other elements
-				}
+                Class clazz = Class.forName(field.getGenericType().toString().split(" ")[1]);
 
-				if (superClass == null
-						|| !superClass
-								.equals("cz.fi.muni.jhuska.bc.api.AbstractComponent")) {
+                String superClass = null;
+                try {
+                    superClass = (clazz.getGenericSuperclass().toString().split(" ")[1]);
+                } catch (NullPointerException ex) {
+                    // it is ok in some cases, lets continue with other elements
+                }
 
-					i.remove();
-				}
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException(e);
-			}
-		}
+                if (superClass == null || !superClass.equals("cz.fi.muni.jhuska.bc.api.AbstractComponent")) {
 
-		return findByFields;
-	}
+                    i.remove();
+                }
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
-	@Override
-	public Object[] resolve(Method method) {
-		return new Object[method.getParameterTypes().length];
-	}
+        return findByFields;
+    }
+
+    @Override
+    public Object[] resolve(Method method) {
+        return new Object[method.getParameterTypes().length];
+    }
 
 }
