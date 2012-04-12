@@ -4,8 +4,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import cz.fi.muni.jhuska.bc.api.AbstractComponentStub;
+import cz.fi.muni.jhuska.bc.api.AbstractPage;
 
-public class TestPage {
+public class TestPage implements AbstractPage {
 
 	@FindBy(xpath = "//div[@id='rootElement']")
 	private AbstractComponentStub abstractComponent;
