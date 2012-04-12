@@ -8,7 +8,6 @@ import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
-import org.jboss.arquillian.graphene.context.GrapheneContext;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ArchivePaths;
@@ -17,60 +16,69 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import cz.fi.muni.jhuska.bc.annotations.Page;
 import cz.fi.muni.jhuska.bc.api.AbstractComponentStub;
+import cz.fi.muni.jhuska.bc.api.AbstractPage;
 import cz.fi.muni.jhuska.bc.drone.test.page.TestPage;
 
 public class TestInitializingComponent extends Arquillian {
 
-	@FindBy(xpath = "//div[@id='rootElement']")
-	private AbstractComponentStub abstractComponent;
-	
-	@FindBy(xpath = "//div[@id='rootElement']")
-	private WebElement element;
-	
-	@FindBy(xpath="//input")
-	private WebElement input;
-	
-	@Page
-	private TestPage testPage;
+    @FindBy(xpath = "//div[@id='rootElement']")
+    private AbstractComponentStub abstractComponent;
 
-	private final String EXPECTED_NESTED_ELEMENT_TEXT = "Some Value";
+    @FindBy(xpath = "//input")
+    private WebElement input;
 
-	@Drone
-	WebDriver selenium;
+    @Page
+    private TestPage testPage;
 
-	@ArquillianResource
-	protected URL contextRoot;
+    private final String EXPECTED_NESTED_ELEMENT_TEXT = "Some Value";
 
-	private static final String WEB_APP_SRC = "src/test/webapp";
+    @Drone
+    WebDriver selenium;
 
-	@Deployment(testable = false)
-	public static WebArchive deploy() {
-		return ShrinkWrap.create(WebArchive.class, "drone-test.war")
-				.addAsWebResource(new File(WEB_APP_SRC + "/index.html"),
-						ArchivePaths.create("index.html"));
-	}
+    @ArquillianResource
+    protected URL contextRoot;
 
-	@Test
-	public void testComponentIsInitialized() {
-		assertNotNull(abstractComponent,
-				"AbstractComponent should be initialised at this point!");
-	}
+    private static final String WEB_APP_SRC = "src/test/webapp";
 
-	@Test
-	public void testComponentHasSetRootCorrectly() {
-		selenium.get(contextRoot + "index.html");
+    @Deployment(testable = false)
+    public static WebArchive deploy() {
+        return ShrinkWrap.create(WebArchive.class, "drone-test.war").addAsWebResource(new File(WEB_APP_SRC + "/index.html"),
+            ArchivePaths.create("index.html"));
+    }
 
-		assertEquals(abstractComponent.invokeMethodOnElementRefByXpath(),
-				EXPECTED_NESTED_ELEMENT_TEXT, "The root was not set correctly!");
-		
-		input.sendKeys("Gooseka");
-		input.sendKeys("\b");
-		
-	}
+    @BeforeMethod
+    public void loadPage() {
+        selenium.get(contextRoot + "index.html");
+    }
+
+    @Test
+    public void testComponentIsInitialized() {
+        assertNotNull(abstractComponent, "AbstractComponent should be initialised at this point!");
+    }
+
+    @Test
+    public void testComponentHasSetRootCorrectly() {
+        assertEquals(abstractComponent.invokeMethodOnElementRefByXpath(), EXPECTED_NESTED_ELEMENT_TEXT,
+            "The root was not set correctly!");
+    }
+
+    @Test
+    public void testPageObjectInitialisedCorrectly() {
+        assertEquals(testPage.getAbstractComponent().invokeMethodOnElementRefByXpath(), EXPECTED_NESTED_ELEMENT_TEXT,
+            "The page component was not set correctly!");
+    }
+
+    @Test
+    public void testOtherWebElementsInitialisedCorrectly() {
+        String EXPECTED_VALUE = "Gooseka";
+        input.sendKeys(EXPECTED_VALUE);
+        
+        assertEquals(input.getAttribute("value"), EXPECTED_VALUE,
+            "The value of the input is wrong, the element which represents it was not initialised correctly!");
+    }
 }
