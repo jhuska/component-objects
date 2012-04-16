@@ -3,10 +3,9 @@ package cz.fi.muni.jhuska.bc.drone.test.page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import cz.fi.muni.jhuska.bc.api.AbstractComponentStub;
-import cz.fi.muni.jhuska.bc.api.AbstractPage;
+import cz.fi.muni.jhuska.bc.components.common.AbstractComponentStub;
 
-public class TestPage implements AbstractPage {
+public class TestPage {
 
 	@FindBy(xpath = "//div[@id='rootElement']")
 	private AbstractComponentStub abstractComponent;

@@ -1,10 +1,10 @@
-package cz.fi.muni.jhuska.bc.api;
+package cz.fi.muni.jhuska.bc.components.common;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import cz.fi.muni.jhuska.bc.annotations.Root;
-import cz.fi.muni.jhuska.bc.api.AbstractComponent;
+import cz.fi.muni.jhuska.bc.components.AbstractComponent;
 
 public class AbstractComponentStub extends AbstractComponent {
 

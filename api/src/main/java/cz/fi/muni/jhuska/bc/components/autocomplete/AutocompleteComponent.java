@@ -1,6 +1,9 @@
-package cz.fi.muni.jhuska.bc.api;
+package cz.fi.muni.jhuska.bc.components.autocomplete;
 
 import java.util.List;
+
+import cz.fi.muni.jhuska.bc.components.common.Component;
+import cz.fi.muni.jhuska.bc.components.scrolling.ScrollingType;
 
 /**
  * <p>
@@ -38,13 +41,8 @@ public interface AutocompleteComponent<T> extends Component {
 
 	/**
 	 * <p>
-	 * Finishes the filling in the input, that is, it closes suggestion list if
-	 * there is any.
-	 * </p>
-	 * <p>
-	 * In other words it fill in the input without a need to autocomplete with
-	 * any suggestion. It is handy when there are no suggestions available and
-	 * user wants to fill in the input nevertheless.
+	 * Finishes the filling in the input, that is, fill in the input not by
+	 * selecting from the suggestions list, but by direct typing in.
 	 * </p>
 	 */
 	void finish();
@@ -77,7 +75,6 @@ public interface AutocompleteComponent<T> extends Component {
 	 * values filled in directly.
 	 * </p>
 	 * 
-	 * @param regex
 	 * @return
 	 * @see #setSeparator(String)
 	 */
@@ -183,13 +180,14 @@ public interface AutocompleteComponent<T> extends Component {
 	 * returned.
 	 * </p>
 	 * 
+	 * 
 	 * @param string
 	 *            the characters which are about to write to the autocomplete
 	 *            input
 	 * @return list with all provided suggestions, if there are no suggestions
 	 *         after typing empty list is returned
 	 */
-	List<Suggestion<T>> typeAtOnce(String string);
+	List<Suggestion<T>> typeString(String string);
 
 	/**
 	 * <p>

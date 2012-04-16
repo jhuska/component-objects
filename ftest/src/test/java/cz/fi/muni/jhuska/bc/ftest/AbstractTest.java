@@ -40,10 +40,10 @@ public class AbstractTest extends Arquillian {
             .addAsLibraries(
                 resolver.artifacts("org.richfaces.ui:richfaces-components-ui", "org.richfaces.core:richfaces-core-impl")
                     .resolveAsFiles());
-
+        
         return war;
     }
-
+    
     @BeforeMethod
     public void loadTestPage() {
         webDriver.get("http://localhost:8080/ftest-app/components/" + getAdditionToContextRoot() + ".jsf");

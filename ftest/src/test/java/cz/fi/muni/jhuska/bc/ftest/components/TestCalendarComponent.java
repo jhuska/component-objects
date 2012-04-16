@@ -23,9 +23,9 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import cz.fi.muni.jhuska.bc.api.CalendarPopupComponent.CalendarDay;
-import cz.fi.muni.jhuska.bc.api.CalendarPopupComponent.CalendarWeek;
-import cz.fi.muni.jhuska.bc.api.ScrollingType;
+import cz.fi.muni.jhuska.bc.components.calendar.CalendarPopupComponent.CalendarDay;
+import cz.fi.muni.jhuska.bc.components.calendar.CalendarPopupComponent.CalendarWeek;
+import cz.fi.muni.jhuska.bc.components.scrolling.ScrollingType;
 import cz.fi.muni.jhuska.bc.ftest.AbstractTest;
 import cz.fi.muni.jhuska.bc.impl.CalendarPopupComponentImpl;
 

@@ -1,6 +1,9 @@
-package cz.fi.muni.jhuska.bc.api;
+package cz.fi.muni.jhuska.bc.components.table;
 
 import java.util.List;
+
+import cz.fi.muni.jhuska.bc.components.common.Component;
+import cz.fi.muni.jhuska.bc.components.scrolling.DataScrollerComponent;
 
 /**
  * <p>
@@ -44,22 +47,22 @@ public interface DataTableComponent extends Component {
 	 * @return
 	 */
 	int getNumberOfCells();
-	
+
 	/**
 	 * 
 	 * @author jhuska
-	 *
+	 * 
 	 */
 	public interface Function {
-		
-		boolean accept(PartOfTable partOfTable);
+
+		boolean accept(Cell<?> cell);
 	}
-	
-	List<Cell> findCell(Function function);
-	
-	List<Column> findColumn(Function function);
-	
-	List<Row> findRow(Function function);
+
+	List<Cell<?>> findCell(Function function);
+
+//	List<Column<?>> findColumn(Function function);
+
+//	List<Row> findRow(Function function);
 
 	/**
 	 * <p>
@@ -83,7 +86,7 @@ public interface DataTableComponent extends Component {
 	 * @param column
 	 * @return
 	 */
-	Cell getCell(Row row, Column column);
+	Cell<?> getCell(Row row, Column<?> column);
 
 	/**
 	 * Returns the list of all header cells, in other words the whole table
@@ -123,7 +126,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @return
 	 */
-	Column getFirstColumn();
+	Column<?> getFirstColumn();
 
 	/**
 	 * Returns the last column of the table, the footer column if available, is
@@ -131,7 +134,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @return
 	 */
-	Column getLastColumn();
+	Column<?> getLastColumn();
 
 	/**
 	 * <p>
@@ -177,7 +180,7 @@ public interface DataTableComponent extends Component {
 	 *            the order of the column
 	 * @return the particular column, or null if it does not exist
 	 */
-	Column getColumn(int order);
+	Column<?> getColumn(int order);
 
 	/**
 	 * <p>
@@ -192,106 +195,50 @@ public interface DataTableComponent extends Component {
 	 *            the header of requested column
 	 * @return the particular column, or null if it does not exist
 	 */
-	Column getColumn(Header header);
+	Column<?> getColumn(Header header);
 
-	/**
-	 * Represents any part of the table.
-	 * 
-	 * @author jhuska
-	 */
-	public interface PartOfTable extends ComponentsContainer {
-
-		/**
-		 * Returns list with all cells from a particular table area
-		 * 
-		 * @return
-		 */
-		List<Cell> getAllCells();
-
-		/**
-		 * Returns the number of cells from particular table area
-		 * 
-		 * @return
-		 */
-		int getNumberOfCells();
-	}
-
-	/**
-	 * Represents the header of the column or row.
-	 * 
-	 * @author jhuska
-	 */
-	public interface Header extends PartOfTable {
-
-	}
-
-	/**
-	 * Represents the footer of the column or row.
-	 * 
-	 * @author jhuska
-	 */
-	public interface Footer extends PartOfTable {
-
-	}
-
-	/**
-	 * <p>
-	 * Represents the row of the table.
-	 * </p>
-	 * <p>
-	 * It should be possible to determine the particular row either by the
-	 * header or footer, but most often by the order number. Rows are indexed
-	 * from 0.
-	 * </p>
-	 * 
-	 * @author jhuska
-	 */
-	public interface Row extends PartOfTable {
-
-		/**
-		 * Sets the number of columns you want to have in this particular row.
-		 * It is useful for tables with lot of columns.
-		 * 
-		 * @param numberOfColumns
-		 */
-		void setNumberOfColumns(int numberOfColumns);
-	}
-
-	/**
-	 * <p>
-	 * Represents the column of the table.
-	 * </p>
-	 * <p>
-	 * It should be possible to determine the particular column either by the
-	 * header or footer, but most often by the order number. Columns are indexed
-	 * from 0.
-	 * </p>
-	 * 
-	 * @author jhuska
-	 */
-	public interface Column extends PartOfTable {
-
-		/**
-		 * <p>
-		 * Sets the number of rows you want to have in this particular column.
-		 * It is useful for tables with lot of rows.
-		 * </p>
-		 * 
-		 * @param numberOfRows
-		 */
-		void setNumberOfRows(int numberOfRows);
-	}
-
-	/**
-	 * Represents one particular cell of the table.
-	 * 
-	 * @author jhuska
-	 */
-	public interface Cell extends PartOfTable {
-		String getValue();
-
-		Row whichRow();
-
-		Column whichColumn();
-	}
+//	public interface Structure {
+//
+//		LinkedList<Object> getTypes();
+//		
+//		void setTypes(LinkedList<Object> types);
+//	}
+//
+//	/**
+//	 * 
+//	 * @author jhuska
+//	 *
+//	 */
+//	public class StructureImpl implements DataTableComponent.Structure {
+//
+//		private LinkedList<Object> types;
+//		
+//		public StructureImpl(LinkedList<Object> types) {
+//			super();
+//			if(types == null) {
+//				throw new IllegalArgumentException("Types param must not be null!");
+//			}
+//			this.types = types;
+//		}
+//
+//		@Override
+//		public LinkedList<Object> getTypes() {
+//			return types;
+//		}
+//
+//		@Override
+//		public void setTypes(LinkedList<Object> types) {
+//			if(types == null) {
+//				throw new IllegalArgumentException("Types param must not be null!");
+//			}
+//			this.types = types;
+//		}
+//
+//	}
+	
+//	/**
+//	 * 
+//	 * @param structure
+//	 */
+//	void setStructure(Structure structure);
 }

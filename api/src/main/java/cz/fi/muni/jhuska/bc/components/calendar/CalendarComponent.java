@@ -1,8 +1,11 @@
-package cz.fi.muni.jhuska.bc.api;
+package cz.fi.muni.jhuska.bc.components.calendar;
 
 import java.util.Date;
 
 import org.joda.time.DateTime;
+
+import cz.fi.muni.jhuska.bc.components.common.Component;
+import cz.fi.muni.jhuska.bc.components.scrolling.ScrollingType;
 
 /**
  * Calendar component represents any type of calendar.

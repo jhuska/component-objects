@@ -20,8 +20,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import cz.fi.muni.jhuska.bc.annotations.Page;
-import cz.fi.muni.jhuska.bc.api.AbstractComponentStub;
-import cz.fi.muni.jhuska.bc.api.AbstractPage;
+import cz.fi.muni.jhuska.bc.components.common.AbstractComponentStub;
 import cz.fi.muni.jhuska.bc.drone.test.page.TestPage;
 
 public class TestInitializingComponent extends Arquillian {

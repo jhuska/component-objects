@@ -1,6 +1,8 @@
-package cz.fi.muni.jhuska.bc.api;
+package cz.fi.muni.jhuska.bc.components;
 
 import org.openqa.selenium.WebElement;
+
+import cz.fi.muni.jhuska.bc.components.common.Component;
 
 public class AbstractComponent implements Component {
 	

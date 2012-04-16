@@ -1,4 +1,6 @@
-package cz.fi.muni.jhuska.bc.api;
+package cz.fi.muni.jhuska.bc.components.popup;
+
+import cz.fi.muni.jhuska.bc.components.common.ComponentsContainer;
 
 /**
  * <p>

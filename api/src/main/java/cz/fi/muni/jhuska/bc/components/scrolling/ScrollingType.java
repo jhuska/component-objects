@@ -1,4 +1,4 @@
-package cz.fi.muni.jhuska.bc.api;
+package cz.fi.muni.jhuska.bc.components.scrolling;
 
 /**
  * Enum with different types of scrolling, that is the ways something can be done.

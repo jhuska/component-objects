@@ -1,4 +1,4 @@
-package cz.fi.muni.jhuska.bc.api;
+package cz.fi.muni.jhuska.bc.components;
 
 /**
  * It should ensure in the constructor that it is going represent either

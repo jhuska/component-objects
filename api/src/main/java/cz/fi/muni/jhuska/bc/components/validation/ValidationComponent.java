@@ -1,6 +1,8 @@
-package cz.fi.muni.jhuska.bc.api;
+package cz.fi.muni.jhuska.bc.components.validation;
 
 import java.util.List;
+
+import cz.fi.muni.jhuska.bc.components.common.Component;
 
 /**
  * Validation component represents set of inputs which are validated somehow. That is, there are some constraints, which have to

@@ -1,6 +1,8 @@
-package cz.fi.muni.jhuska.bc.api;
+package cz.fi.muni.jhuska.bc.components.common;
 
 import java.util.List;
+
+import cz.fi.muni.jhuska.bc.components.NestedElements;
 
 /**
  * ComponentsContainer represents a container for components, in other words a
@@ -11,10 +13,6 @@ import java.util.List;
  */
 public interface ComponentsContainer extends Component {
 
-	/**
-	 * 
-	 * @return
-	 */
-	<T> List<NestedElements<T>> getContent();
+	List<NestedElements<?>> getContent();
 
 }
