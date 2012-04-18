@@ -12,16 +12,43 @@ import cz.fi.muni.jhuska.bc.impl.DataTable6ColTypesImpl;
 
 public class TestDataTableComponent extends AbstractTest {
 
-	@FindBy
-	private DataTable6ColTypesImpl<String, String, Integer, String, String, CalendarPopupComponentImpl> table;
+    @FindBy
+    private DataTable6ColTypesImpl<String, String, Integer, String, String, CalendarPopupComponentImpl> table;
+    
+    @Inject
+    private List<String> list;
+    
+    ListOfStrings extends LinkedList<String>;
 
-	@Deployment(testable = false)
-	public static WebArchive deploy() {
-		return createDeployment(TestDataTableComponent.class).addClass(
-				PersonBean.class);
-	}
+//    (Table) list.get(0)
+    
+    list.add((String) table)
+    // z toho fieldu neziskat genericke typy - classy
+    // Jozo Hartinger - jak Weld precte @Inject Event<EventType>; event.fire(new EventType());
+    
+    // List<String> list; list.get(1);
+    
+//    @FindBy
+//    private TableOfPersons tableOfPersons;
+//    
+//    Column<String> tableOfPersons.getColumn1()
+    
+    
+    // 
+    
+    // 
 
-	@Test
-	public void testFoo() {
-	}
+    // implementovat typ tabulka zo 6 stlpcami, TableOfUsers implements DataTable6ColTypesImpl<String, String, Integer, String,
+    // String, CalendarPopupComponentImpl>
+    //
+    // Table.create(String.class, String.class, Integer.class, String.class, String.class, CalendarPopupComponentImpl.class);
+
+    @Deployment(testable = false)
+    public static WebArchive deploy() {
+        return createDeployment(TestDataTableComponent.class).addClass(PersonBean.class);
+    }
+
+    @Test
+    public void testFoo() {
+    }
 }
