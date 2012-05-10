@@ -18,6 +18,8 @@ public interface Row {
 
 	List<Cell<?>> getAllCells();
 	
+	<T> Cell<T> getCell(Column<T> column);
+	
 	/**
 	 * Sets the number of columns you want to have in this particular row.
 	 * It is useful for tables with lot of columns.

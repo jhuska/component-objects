@@ -5,10 +5,20 @@
 <title>Test page</title>
 </head>
 <body>
+	
 	<div id="rootElement">
 		<div class="refByXpath">Some Value</div>
 	</div>
+	
 	<div class="refByXpath">Some value too</div>
-	<input type="text" id="input"/>
+	
+	<input type="text" id="input" />
+	
+	<div>
+		<div id="divWithNestedElements">
+			<div class="foo">This is going to be selected.</div>
+		</div>
+		<div class="foo">This is not going to be selected.</div>
+	</div>
 </body>
 </html>

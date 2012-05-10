@@ -2,6 +2,10 @@ package cz.fi.muni.jhuska.bc.components.calendar;
 
 import java.util.List;
 
+import org.joda.time.DateTime;
+
+import cz.fi.muni.jhuska.bc.components.scrolling.ScrollingType;
+
 /**
  * CalendarPopupComponent represents calendar nested in some kind of popup, it
  * has to be invoked to be shown and has an input associated with it.
@@ -11,6 +15,11 @@ import java.util.List;
  */
 public interface CalendarPopupComponent extends CalendarComponent {
 
+	/**
+	 * Clears the input which is showing the selected date.
+	 */
+	void clearInput();
+	
 	/**
 	 * Displays the calendar only if it is not already displayed, that is when
 	 * it can be displayed in the popup mode, it is shown up.
@@ -22,6 +31,14 @@ public interface CalendarPopupComponent extends CalendarComponent {
 	 * calendar.
 	 */
 	void hideCalendar();
+	
+	/**
+     * Set the date on the calendar
+     *
+     * @param dateTime the date to set
+     * @param type the type of way to set the date, for example by mouse
+     */
+    void gotoDateTime(DateTime dateTime, ScrollingType type);
 
 	/**
 	 * Set the next day of the current set date.

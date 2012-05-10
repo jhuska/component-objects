@@ -7,7 +7,7 @@ import cz.fi.muni.jhuska.bc.components.common.ComponentsContainer;
  * 
  * @author jhuska
  */
-public interface Cell<T> extends ComponentsContainer {
+public interface Cell<T> extends ComponentsContainer<T> {
 
 	Row whichRow();
 

@@ -27,12 +27,4 @@ public interface CalendarComponent extends Component {
      * @param dateTime the date to set
      */
     void gotoDateTime(DateTime dateTime);
-
-    /**
-     * Set the date on the calendar
-     *
-     * @param dateTime the date to set
-     * @param type the type of way to set the date, for example by mouse
-     */
-    void gotoDateTime(DateTime dateTime, ScrollingType type);
 }

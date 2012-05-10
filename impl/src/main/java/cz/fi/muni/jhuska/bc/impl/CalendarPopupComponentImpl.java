@@ -507,6 +507,12 @@ public class CalendarPopupComponentImpl extends AbstractComponent implements
 		this.showYearAndMonthEditorButton = showYearAndMonthEditorButton;
 	}
 
+	@Override
+	public void clearInput() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	// public class TimeUnitImpl implements TimeUnit {
 	//
 	// @Override

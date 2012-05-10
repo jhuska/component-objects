@@ -53,16 +53,26 @@ public interface DataTableComponent extends Component {
 	 * @author jhuska
 	 * 
 	 */
-	public interface Function {
+	public interface CellFunction<T> {
 
-		boolean accept(Cell<?> cell);
+		boolean accept(Cell<T> cell);
 	}
 
-	List<Cell<?>> findCell(Function function);
+	<T> List<Cell<T>> findCells(CellFunction<T> function);
 
-//	List<Column<?>> findColumn(Function function);
+	public interface RowFunction {
 
-//	List<Row> findRow(Function function);
+		boolean accept(Row row);
+	}
+
+	List<Row> findRow(RowFunction function);
+
+	public interface ColumnFunction<T> {
+
+		boolean accept(Column<T> column);
+	}
+
+	<T> List<Column<T>> findColumns(ColumnFunction<T> function);
 
 	/**
 	 * <p>
@@ -86,7 +96,7 @@ public interface DataTableComponent extends Component {
 	 * @param column
 	 * @return
 	 */
-	Cell<?> getCell(Row row, Column<?> column);
+	<T> Cell<T> getCell(Row row, Column<T> column);
 
 	/**
 	 * Returns the list of all header cells, in other words the whole table
@@ -94,7 +104,7 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @return
 	 */
-	List<Header> getTableHeader();
+	Header getTableHeader();
 
 	/**
 	 * Returns the list of all footer cells, in other words the whole table
@@ -102,7 +112,13 @@ public interface DataTableComponent extends Component {
 	 * 
 	 * @return
 	 */
-	List<Footer> getTableFooter();
+	Footer getTableFooter();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	List<Row> getAllRows();
 
 	/**
 	 * Returns the first row of the table, the header row if available, is not
@@ -121,22 +137,6 @@ public interface DataTableComponent extends Component {
 	Row getLastRow();
 
 	/**
-	 * Returns the first column of the table, the header column if available, is
-	 * not counted.
-	 * 
-	 * @return
-	 */
-	Column<?> getFirstColumn();
-
-	/**
-	 * Returns the last column of the table, the footer column if available, is
-	 * not counted.
-	 * 
-	 * @return
-	 */
-	Column<?> getLastColumn();
-
-	/**
 	 * <p>
 	 * Returns the row with the order determined by given param
 	 * <code>order</code>.
@@ -150,95 +150,4 @@ public interface DataTableComponent extends Component {
 	 * @return the particular row, or null if it does not exist
 	 */
 	Row getRow(int order);
-
-	/**
-	 * <p>
-	 * Returns the row, determined by the row header.
-	 * </p>
-	 * <p>
-	 * If such header does not exist or that header is associated rather with
-	 * column, then null is returned.
-	 * </p>
-	 * 
-	 * @param header
-	 *            the header of the requested row
-	 * @return the particular row, or null if it does not exist
-	 */
-	Row getRow(Header header);
-
-	/**
-	 * <p>
-	 * Returns the column with the order determined by given param
-	 * <code>order</code>.
-	 * </p>
-	 * <p>
-	 * Columns are indexed from 0. The header column if available is not
-	 * counted.
-	 * </p>
-	 * 
-	 * @param order
-	 *            the order of the column
-	 * @return the particular column, or null if it does not exist
-	 */
-	Column<?> getColumn(int order);
-
-	/**
-	 * <p>
-	 * Returns the column, determined by the row header.
-	 * </p>
-	 * <p>
-	 * If such header does not exist or that header is associated rather with
-	 * row, then null is returned.
-	 * </p>
-	 * 
-	 * @param header
-	 *            the header of requested column
-	 * @return the particular column, or null if it does not exist
-	 */
-	Column<?> getColumn(Header header);
-
-//	public interface Structure {
-//
-//		LinkedList<Object> getTypes();
-//		
-//		void setTypes(LinkedList<Object> types);
-//	}
-//
-//	/**
-//	 * 
-//	 * @author jhuska
-//	 *
-//	 */
-//	public class StructureImpl implements DataTableComponent.Structure {
-//
-//		private LinkedList<Object> types;
-//		
-//		public StructureImpl(LinkedList<Object> types) {
-//			super();
-//			if(types == null) {
-//				throw new IllegalArgumentException("Types param must not be null!");
-//			}
-//			this.types = types;
-//		}
-//
-//		@Override
-//		public LinkedList<Object> getTypes() {
-//			return types;
-//		}
-//
-//		@Override
-//		public void setTypes(LinkedList<Object> types) {
-//			if(types == null) {
-//				throw new IllegalArgumentException("Types param must not be null!");
-//			}
-//			this.types = types;
-//		}
-//
-//	}
-	
-//	/**
-//	 * 
-//	 * @param structure
-//	 */
-//	void setStructure(Structure structure);
 }

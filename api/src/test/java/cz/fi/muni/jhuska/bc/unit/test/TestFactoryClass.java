@@ -1,11 +1,14 @@
 package cz.fi.muni.jhuska.bc.unit.test;
 
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
+
+import java.util.List;
 
 import org.mockito.Mockito;
 import org.openqa.selenium.By;
@@ -80,6 +83,7 @@ public class TestFactoryClass {
 //            }
 //        })
 
+        
         assertEquals(((AbstractComponentStub) abstrComponent).invokeMethodOnElementRefByClass(),
             REF_BY_CLASS_METHOD_RETURN_VAL, "The method onvoked on referenced element returned wrong value!");
     }

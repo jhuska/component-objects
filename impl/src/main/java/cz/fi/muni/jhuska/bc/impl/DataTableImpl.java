@@ -7,17 +7,17 @@ import org.openqa.selenium.WebElement;
 import cz.fi.muni.jhuska.bc.components.scrolling.DataScrollerComponent;
 import cz.fi.muni.jhuska.bc.components.table.Cell;
 import cz.fi.muni.jhuska.bc.components.table.Column;
-import cz.fi.muni.jhuska.bc.components.table.DataTableComponent6ColTypes;
+import cz.fi.muni.jhuska.bc.components.table.DataTableComponent;
 import cz.fi.muni.jhuska.bc.components.table.Footer;
 import cz.fi.muni.jhuska.bc.components.table.Header;
 import cz.fi.muni.jhuska.bc.components.table.Row;
 
-public class DataTable6ColTypesImpl<A, B, C, D, E, F> implements DataTableComponent6ColTypes {
+public class DataTableImpl implements DataTableComponent {
 
 	@Override
 	public void setDateScroller(DataScrollerComponent scroller) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -33,33 +33,9 @@ public class DataTable6ColTypesImpl<A, B, C, D, E, F> implements DataTableCompon
 	}
 
 	@Override
-	public List<Cell<?>> findCell(Function function) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public int getNumberOfColumns() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public Cell<?> getCell(Row row, Column<?> column) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Header> getTableHeader() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Footer> getTableFooter() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -75,37 +51,7 @@ public class DataTable6ColTypesImpl<A, B, C, D, E, F> implements DataTableCompon
 	}
 
 	@Override
-	public Column<?> getFirstColumn() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Column<?> getLastColumn() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Row getRow(int order) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Row getRow(Header header) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Column<?> getColumn(int order) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Column<?> getColumn(Header header) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -113,7 +59,7 @@ public class DataTable6ColTypesImpl<A, B, C, D, E, F> implements DataTableCompon
 	@Override
 	public void setRoot(WebElement root) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -122,4 +68,45 @@ public class DataTable6ColTypesImpl<A, B, C, D, E, F> implements DataTableCompon
 		return null;
 	}
 
+	@Override
+	public <T> List<Cell<T>> findCells(CellFunction<T> function) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Row> findRow(RowFunction function) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T> List<Column<T>> findColumns(ColumnFunction<T> function) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T> Cell<T> getCell(Row row, Column<T> column) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Row> getAllRows() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Footer getTableFooter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Header getTableHeader() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

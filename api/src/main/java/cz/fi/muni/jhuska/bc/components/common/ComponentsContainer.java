@@ -11,8 +11,8 @@ import cz.fi.muni.jhuska.bc.components.NestedElements;
  * @author jhuska
  * 
  */
-public interface ComponentsContainer extends Component {
+public interface ComponentsContainer<T> extends Component {
 
-	List<NestedElements<?>> getContent();
+	List<NestedElements<T>> getContent();
 
 }
