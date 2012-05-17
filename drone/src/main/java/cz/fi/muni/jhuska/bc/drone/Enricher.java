@@ -16,8 +16,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import cz.fi.muni.jhuska.bc.annotations.Page;
-import cz.fi.muni.jhuska.bc.components.AbstractComponent;
-import cz.fi.muni.jhuska.bc.components.Factory;
+import cz.fi.muni.jhuska.bc.components.common.AbstractComponent;
+import cz.fi.muni.jhuska.bc.components.common.Factory;
 
 public class Enricher implements TestEnricher {
 

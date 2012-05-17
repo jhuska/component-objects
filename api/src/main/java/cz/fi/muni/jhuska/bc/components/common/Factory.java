@@ -1,4 +1,4 @@
-package cz.fi.muni.jhuska.bc.components;
+package cz.fi.muni.jhuska.bc.components.common;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

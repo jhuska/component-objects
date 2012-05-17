@@ -1,6 +1,6 @@
 package cz.fi.muni.jhuska.bc.components.table;
 
-public interface DataTableComponent6<A, B, C, D, E, F> extends DataTableComponent {
+public interface TableComponent6<A, B, C, D, E, F> extends TableComponent {
 
 	Column<A> getColumn1();
 	Column<B> getColumn2();

@@ -1,9 +1,9 @@
 package cz.fi.muni.jhuska.bc.impl;
 
 import cz.fi.muni.jhuska.bc.components.table.Column;
-import cz.fi.muni.jhuska.bc.components.table.DataTableComponent6;
+import cz.fi.muni.jhuska.bc.components.table.TableComponent6;
 
-public class DataTable6Impl<A, B, C, D, E, F> extends DataTableImpl implements DataTableComponent6<A, B, C, D, E, F> {
+public class TableComponent6Impl<A, B, C, D, E, F> extends TableComponentImpl implements TableComponent6<A, B, C, D, E, F> {
 
 	@Override
 	public Column<A> getColumn1() {

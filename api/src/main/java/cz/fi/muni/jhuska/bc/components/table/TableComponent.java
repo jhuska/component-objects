@@ -16,7 +16,7 @@ import cz.fi.muni.jhuska.bc.components.scrolling.DataScrollerComponent;
  * @author jhuska
  * 
  */
-public interface DataTableComponent extends Component {
+public interface TableComponent extends Component {
 
 	/**
 	 * Associates this data table with a given data scroller

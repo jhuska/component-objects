@@ -10,10 +10,10 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.Test;
 
-import cz.fi.muni.jhuska.bc.components.NestedElements;
+import cz.fi.muni.jhuska.bc.components.common.NestedElements;
 import cz.fi.muni.jhuska.bc.components.table.Cell;
 import cz.fi.muni.jhuska.bc.components.table.Column;
-import cz.fi.muni.jhuska.bc.components.table.DataTableComponent.CellFunction;
+import cz.fi.muni.jhuska.bc.components.table.TableComponent.CellFunction;
 import cz.fi.muni.jhuska.bc.components.table.Footer;
 import cz.fi.muni.jhuska.bc.ftest.AbstractTest;
 import cz.fi.muni.jhuska.bc.ftest.components.TableOfPersons.Person;

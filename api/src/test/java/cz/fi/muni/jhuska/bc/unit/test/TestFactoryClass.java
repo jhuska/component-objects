@@ -16,9 +16,9 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import cz.fi.muni.jhuska.bc.components.AbstractComponent;
-import cz.fi.muni.jhuska.bc.components.Factory;
+import cz.fi.muni.jhuska.bc.components.common.AbstractComponent;
 import cz.fi.muni.jhuska.bc.components.common.AbstractComponentStub;
+import cz.fi.muni.jhuska.bc.components.common.Factory;
 
 public class TestFactoryClass {
 

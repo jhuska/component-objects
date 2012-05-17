@@ -40,7 +40,7 @@ public class TestCalendarComponent extends AbstractTest {
 
     // @Inject
     // private Page page;
-
+    
     private WebElement calendarRoot;
 
     @Deployment(testable = false)

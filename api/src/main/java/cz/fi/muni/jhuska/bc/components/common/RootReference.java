@@ -1,4 +1,4 @@
-package cz.fi.muni.jhuska.bc.components;
+package cz.fi.muni.jhuska.bc.components.common;
 
 import org.openqa.selenium.WebElement;
 

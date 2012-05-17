@@ -13,8 +13,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import cz.fi.muni.jhuska.bc.annotations.Root;
-import cz.fi.muni.jhuska.bc.components.AbstractComponent;
 import cz.fi.muni.jhuska.bc.components.calendar.CalendarPopupComponent;
+import cz.fi.muni.jhuska.bc.components.common.AbstractComponent;
 import cz.fi.muni.jhuska.bc.components.scrolling.ScrollingType;
 
 public class CalendarPopupComponentImpl extends AbstractComponent implements

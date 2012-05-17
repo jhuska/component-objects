@@ -7,12 +7,12 @@ import org.openqa.selenium.WebElement;
 import cz.fi.muni.jhuska.bc.components.scrolling.DataScrollerComponent;
 import cz.fi.muni.jhuska.bc.components.table.Cell;
 import cz.fi.muni.jhuska.bc.components.table.Column;
-import cz.fi.muni.jhuska.bc.components.table.DataTableComponent;
+import cz.fi.muni.jhuska.bc.components.table.TableComponent;
 import cz.fi.muni.jhuska.bc.components.table.Footer;
 import cz.fi.muni.jhuska.bc.components.table.Header;
 import cz.fi.muni.jhuska.bc.components.table.Row;
 
-public class DataTableImpl implements DataTableComponent {
+public class TableComponentImpl implements TableComponent {
 
 	@Override
 	public void setDateScroller(DataScrollerComponent scroller) {

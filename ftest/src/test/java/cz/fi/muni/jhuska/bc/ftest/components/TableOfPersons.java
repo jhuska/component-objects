@@ -4,9 +4,9 @@ package cz.fi.muni.jhuska.bc.ftest.components;
 import java.util.List;
 
 import cz.fi.muni.jhuska.bc.components.table.Row;
-import cz.fi.muni.jhuska.bc.impl.DataTable6Impl;
+import cz.fi.muni.jhuska.bc.impl.TableComponent6Impl;
 
-public class TableOfPersons extends DataTable6Impl<String, String, Integer, String, String, String> {
+public class TableOfPersons extends TableComponent6Impl<String, String, Integer, String, String, String> {
 
 	public Person getPerson(Row row) {
 		Person person = new Person();
