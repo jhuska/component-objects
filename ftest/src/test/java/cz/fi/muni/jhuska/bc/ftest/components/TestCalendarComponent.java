@@ -37,9 +37,6 @@ public class TestCalendarComponent extends AbstractTest {
     private final By CALENDAR_INPUT = By.className("rf-cal-inp");
     //do not forget also to set accordingly the model's date format
     private final String DATE_FORMAT = "dd/M/yyyy hh:mm a";
-
-    // @Inject
-    // private Page page;
     
     private WebElement calendarRoot;
 
