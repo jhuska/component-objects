@@ -48,29 +48,9 @@ public interface TableComponent extends Component {
 	 */
 	int getNumberOfCells();
 
-	/**
-	 * 
-	 * @author jhuska
-	 * 
-	 */
-	public interface CellFunction<T> {
-
-		boolean accept(Cell<T> cell);
-	}
-
 	<T> List<Cell<T>> findCells(CellFunction<T> function);
-
-	public interface RowFunction {
-
-		boolean accept(Row row);
-	}
-
+	
 	List<Row> findRow(RowFunction function);
-
-	public interface ColumnFunction<T> {
-
-		boolean accept(Column<T> column);
-	}
 
 	<T> List<Column<T>> findColumns(ColumnFunction<T> function);
 
