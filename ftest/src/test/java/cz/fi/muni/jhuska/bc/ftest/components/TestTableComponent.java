@@ -12,14 +12,14 @@ import org.testng.annotations.Test;
 
 import cz.fi.muni.jhuska.bc.components.common.NestedElements;
 import cz.fi.muni.jhuska.bc.components.table.Cell;
+import cz.fi.muni.jhuska.bc.components.table.CellFunction;
 import cz.fi.muni.jhuska.bc.components.table.Column;
-import cz.fi.muni.jhuska.bc.components.table.TableComponent.CellFunction;
 import cz.fi.muni.jhuska.bc.components.table.Footer;
 import cz.fi.muni.jhuska.bc.ftest.AbstractTest;
 import cz.fi.muni.jhuska.bc.ftest.components.TableOfPersons.Person;
 import cz.fi.muni.jhuska.bc.ftest.components.bean.PersonBean;
 
-public class TestDataTableComponent extends AbstractTest {
+public class TestTableComponent extends AbstractTest {
 
 	@FindBy(xpath = "//foooooooo")
 	private TableOfPersons table;
@@ -42,7 +42,7 @@ public class TestDataTableComponent extends AbstractTest {
 
 	@Deployment(testable = false)
 	public static WebArchive deploy() {
-		return createDeployment(TestDataTableComponent.class).addClass(
+		return createDeployment(TestTableComponent.class).addClass(
 				PersonBean.class);
 	}
 

@@ -1,4 +1,5 @@
-package cz.fi.muni.jhuska.bc.ftest.components;
+package cz.fi.muni.jhuska.
+bc.ftest.components;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;

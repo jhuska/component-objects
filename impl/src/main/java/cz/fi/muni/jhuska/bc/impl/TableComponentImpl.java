@@ -6,11 +6,14 @@ import org.openqa.selenium.WebElement;
 
 import cz.fi.muni.jhuska.bc.components.scrolling.DataScrollerComponent;
 import cz.fi.muni.jhuska.bc.components.table.Cell;
+import cz.fi.muni.jhuska.bc.components.table.CellFunction;
 import cz.fi.muni.jhuska.bc.components.table.Column;
-import cz.fi.muni.jhuska.bc.components.table.TableComponent;
+import cz.fi.muni.jhuska.bc.components.table.ColumnFunction;
 import cz.fi.muni.jhuska.bc.components.table.Footer;
 import cz.fi.muni.jhuska.bc.components.table.Header;
 import cz.fi.muni.jhuska.bc.components.table.Row;
+import cz.fi.muni.jhuska.bc.components.table.RowFunction;
+import cz.fi.muni.jhuska.bc.components.table.TableComponent;
 
 public class TableComponentImpl implements TableComponent {
 
