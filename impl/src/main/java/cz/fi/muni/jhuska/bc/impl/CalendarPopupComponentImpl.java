@@ -9,8 +9,11 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cz.fi.muni.jhuska.bc.annotations.Root;
 import cz.fi.muni.jhuska.bc.components.calendar.CalendarPopupComponent;
@@ -61,6 +64,13 @@ public class CalendarPopupComponentImpl extends AbstractComponent implements
 
 		if (!popupWithCalendar.isDisplayed()) {
 			showCalendarButton.click();
+			
+			long end = System.currentTimeMillis() + 2000;
+			while(System.currentTimeMillis() < end) {
+				if(popupWithCalendar.isDisplayed()) {
+					break;
+				}
+			}
 		}
 	}
 

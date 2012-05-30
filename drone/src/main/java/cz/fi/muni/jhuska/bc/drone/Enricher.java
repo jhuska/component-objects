@@ -23,6 +23,7 @@ public class Enricher implements TestEnricher {
 
 	private static final String FIND_BY_ANNOTATION = "org.openqa.selenium.support.FindBy";
 	private static final String PAGE_ANNOTATION = "cz.fi.muni.jhuska.bc.annotations.Page";
+	private final String ABSTRACT_COMPONENT = "cz.fi.muni.jhuska.bc.components.common.AbstractComponent";
 
 	@Override
 	public void enrich(Object testCase) {
@@ -168,28 +169,23 @@ public class Enricher implements TestEnricher {
 
 		for (Iterator<Field> i = findByFields.iterator(); i.hasNext();) {
 
+			Field field = i.next();
+
+			Class clazz = field.getType();
+
+			String superClass = null;
 			try {
-				Field field = i.next();
-
-				Class clazz = Class.forName(field.getGenericType().toString()
+				superClass = (clazz.getGenericSuperclass().toString()
 						.split(" ")[1]);
+			} catch (NullPointerException ex) {
+				// it is ok in some cases, lets continue with other elements
+			}
 
-				String superClass = null;
-				try {
-					superClass = (clazz.getGenericSuperclass().toString()
-							.split(" ")[1]);
-				} catch (NullPointerException ex) {
-					// it is ok in some cases, lets continue with other elements
-				}
+			if (superClass == null
+					|| !superClass
+							.equals(ABSTRACT_COMPONENT)) {
 
-				if (superClass == null
-						|| !superClass
-								.equals("cz.fi.muni.jhuska.bc.api.AbstractComponent")) {
-
-					i.remove();
-				}
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException(e);
+				i.remove();
 			}
 		}
 

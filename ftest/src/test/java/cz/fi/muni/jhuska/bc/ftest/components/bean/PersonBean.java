@@ -13,6 +13,27 @@ public class PersonBean {
 
 	private List<Person> persons;
 	
+	public List<String> autocomplete(String prefix) {
+		List<String> allCities = new ArrayList<String>();
+		allCities.add("Brno");
+		allCities.add("Prague");
+		allCities.add("Bratislava");
+		allCities.add("London");
+		allCities.add("Leongard");
+		allCities.add("Munich");
+		allCities.add("Rome");
+		allCities.add("Berlin");
+		
+		List<String> rightCities = new ArrayList<String>();
+		for(String i : allCities) {
+			if(i.contains(prefix)) {
+				rightCities.add(i);
+			}
+		}
+		
+		return rightCities;
+	}
+	
 	@PostConstruct
 	public void initPersons() {
 		persons = new ArrayList<PersonBean.Person>();
