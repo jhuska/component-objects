@@ -2,16 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>cz.jhuska.bachelor.thesis</groupId>
-	<artifactId>bachelor-thesis-parent</artifactId>
+	<groupId>org.richfaces.tests</groupId>
+	<artifactId>component-objects-richfaces-impl-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>api</module>
 		<module>impl</module>
 		<module>ftest</module>
-		<module>drone</module>
 	</modules>
 
 	<properties>
@@ -96,6 +94,19 @@
 				<groupId>org.jboss.arquillian.graphene</groupId>
 				<artifactId>graphene-webdriver</artifactId>
 				<type>pom</type>
+				<version>${version.arquillian.graphene}</version>
+			</dependency>
+
+			<!-- Component objects SPI -->
+			<dependency>
+				<groupId>org.jboss.arquillian.graphene</groupId>
+				<artifactId>component-objects-spi</artifactId>
+				<version>${version.arquillian.graphene}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.arquillian.graphene</groupId>
+				<artifactId>graphene-webdriver-impl</artifactId>
 				<version>${version.arquillian.graphene}</version>
 			</dependency>
 

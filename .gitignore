@@ -1,7 +1,5 @@
-*/target/*
-*.settings/*
-*/.settings/*
-*/test-output/*
-*.project
-*.classpath
-*/doc/*
+**.classpath**
+**.settings**
+**.project**
+**target**
+**test-output**
