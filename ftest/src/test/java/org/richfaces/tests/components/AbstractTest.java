@@ -1,4 +1,4 @@
-package org.richfaces.tests.components.ftest;
+package org.richfaces.tests.components;
 
 import java.io.File;
 

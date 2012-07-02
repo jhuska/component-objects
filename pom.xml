@@ -111,18 +111,18 @@
 			</dependency>
 
 			<!-- Arquillian JUnit -->
-			<dependency>
-				<groupId>org.jboss.arquillian.junit</groupId>
-				<artifactId>arquillian-junit-standalone</artifactId>
-				<version>${version.arquillian.graphene}</version>
-			</dependency>
+			<!-- <dependency> -->
+			<!-- <groupId>org.jboss.arquillian.junit</groupId> -->
+			<!-- <artifactId>arquillian-junit-standalone</artifactId> -->
+			<!-- <version>${version.arquillian.graphene}</version> -->
+			<!-- </dependency> -->
 
 			<!-- JUnit -->
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${version.junit}</version>
-			</dependency>
+			<!-- <dependency> -->
+			<!-- <groupId>junit</groupId> -->
+			<!-- <artifactId>junit</artifactId> -->
+			<!-- <version>${version.junit}</version> -->
+			<!-- </dependency> -->
 		</dependencies>
 	</dependencyManagement>
 

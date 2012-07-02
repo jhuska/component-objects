@@ -1,10 +1,11 @@
-package org.richfaces.tests.components.ftest.componentobjects;
+package org.richfaces.tests.components.objects;
 
 
 import java.util.List;
 
 import org.jboss.arquillian.graphene.spi.components.table.Row;
 import org.richfaces.tests.components.TableComponent6Impl;
+import org.richfaces.tests.components.objects.bean.Person;
 
 public class TableOfPersons extends TableComponent6Impl<String, String, Integer, String, String, String> {
 
@@ -32,53 +33,4 @@ public class TableOfPersons extends TableComponent6Impl<String, String, Integer,
 		
 		return sum;
 	}
-	
-	public class Person {
-		String firstName;
-		String lastName;
-		Integer age;
-		String address;
-		String phone;
-        String job;
-		
-		public String getFirstName() {
-			return firstName;
-		}
-		public void setFirstName(String firstName) {
-			this.firstName = firstName;
-		}
-		public String getLastName() {
-			return lastName;
-		}
-		public void setLastName(String lastName) {
-			this.lastName = lastName;
-		}
-		public Integer getAge() {
-			return age;
-		}
-		public void setAge(Integer age) {
-			this.age = age;
-		}
-		public String getAddress() {
-			return address;
-		}
-		public void setAddress(String address) {
-			this.address = address;
-		}
-		public String getPhone() {
-			return phone;
-		}
-		public void setPhone(String phone) {
-			this.phone = phone;
-		}
-		public String getJob() {
-			return job;
-		}
-		public void setJob(String job) {
-			this.job = job;
-		}
-		
-	}
-	
-	
 }

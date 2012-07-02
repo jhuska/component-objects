@@ -1,4 +1,4 @@
-package org.richfaces.tests.components.ftest.componentobjects.bean;
+package org.richfaces.tests.components.objects.bean;
 
 import java.util.ArrayList;
 import java.util.List;

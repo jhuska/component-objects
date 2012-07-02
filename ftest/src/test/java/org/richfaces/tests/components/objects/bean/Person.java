@@ -1,21 +1,26 @@
-package org.richfaces.tests.components.ftest.componentobjects.bean;
+package org.richfaces.tests.components.objects.bean;
 
 public class Person {
 
     private String firstName;
-    private String surnameName;
+    private String lastName;
     private Integer age;
     private String address;
     private String phone;
+    private String job;
 
     public Person(String firstName, String surnameName, Integer age,
             String address, String phone) {
         super();
         this.firstName = firstName;
-        this.surnameName = surnameName;
+        this.lastName = surnameName;
         this.age = age;
         this.address = address;
         this.phone = phone;
+    }
+    
+    public Person() {
+        
     }
 
     public String getFirstName() {
@@ -26,12 +31,12 @@ public class Person {
         this.firstName = firstName;
     }
 
-    public String getSurnameName() {
-        return surnameName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurnameName(String surnameName) {
-        this.surnameName = surnameName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Integer getAge() {
@@ -57,4 +62,14 @@ public class Person {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+   
 }

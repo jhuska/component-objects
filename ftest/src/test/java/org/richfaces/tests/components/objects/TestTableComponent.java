@@ -1,4 +1,4 @@
-package org.richfaces.tests.components.ftest.componentobjects;
+package org.richfaces.tests.components.objects;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -13,9 +13,9 @@ import org.jboss.arquillian.graphene.spi.components.table.Column;
 import org.jboss.arquillian.graphene.spi.components.table.Footer;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.openqa.selenium.support.FindBy;
-import org.richfaces.tests.components.ftest.AbstractTest;
-import org.richfaces.tests.components.ftest.componentobjects.TableOfPersons.Person;
-import org.richfaces.tests.components.ftest.componentobjects.bean.PersonBean;
+import org.richfaces.tests.components.AbstractTest;
+import org.richfaces.tests.components.objects.bean.Person;
+import org.richfaces.tests.components.objects.bean.PersonBean;
 import org.testng.annotations.Test;
 
 public class TestTableComponent extends AbstractTest {

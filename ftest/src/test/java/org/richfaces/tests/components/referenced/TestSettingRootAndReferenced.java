@@ -1,4 +1,4 @@
-package org.richfaces.tests.components.ftest.referenced;
+package org.richfaces.tests.components.referenced;
 
 import static org.testng.Assert.assertEquals;
 
@@ -8,7 +8,7 @@ import org.jboss.arquillian.graphene.spi.components.common.AbstractComponentStub
 import org.jboss.arquillian.graphene.spi.components.common.Factory;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.openqa.selenium.By;
-import org.richfaces.tests.components.ftest.AbstractTest;
+import org.richfaces.tests.components.AbstractTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

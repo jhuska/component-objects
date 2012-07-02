@@ -1,4 +1,4 @@
-package org.richfaces.tests.components.ftest.componentobjects;
+package org.richfaces.tests.components.objects;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -23,8 +23,8 @@ import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.richfaces.tests.components.AbstractTest;
 import org.richfaces.tests.components.CalendarPopupComponentImpl;
-import org.richfaces.tests.components.ftest.AbstractTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
