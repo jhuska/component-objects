@@ -24,7 +24,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.richfaces.tests.components.AbstractTest;
-import org.richfaces.tests.components.CalendarPopupComponentImpl;
+import org.richfaces.tests.components.calendar.CalendarPopupComponentImpl;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

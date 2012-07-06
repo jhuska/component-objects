@@ -1,10 +1,8 @@
-package org.richfaces.tests.components;
+package org.richfaces.tests.components.validation;
 
 import java.util.List;
 
 import org.jboss.arquillian.graphene.spi.components.validation.ValidationComponent;
-import org.jboss.arquillian.graphene.spi.components.validation.ValidationComponent.ErrorMessage;
-import org.jboss.arquillian.graphene.spi.components.validation.ValidationComponent.StaticMessagePart;
 import org.openqa.selenium.WebElement;
 
 public class ValidationComponentImpl implements ValidationComponent {

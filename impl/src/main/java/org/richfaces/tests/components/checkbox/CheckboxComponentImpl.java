@@ -1,4 +1,4 @@
-package org.richfaces.tests.components;
+package org.richfaces.tests.components.checkbox;
 
 import org.jboss.arquillian.graphene.spi.components.checkbox.CheckboxComponent;
 

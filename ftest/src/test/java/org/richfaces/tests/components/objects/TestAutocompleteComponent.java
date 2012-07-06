@@ -4,7 +4,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.openqa.selenium.support.FindBy;
 import org.richfaces.tests.components.AbstractTest;
-import org.richfaces.tests.components.AutocompleteComponentImpl;
+import org.richfaces.tests.components.autocomplete.AutocompleteComponentImpl;
 import org.testng.annotations.Test;
 
 public class TestAutocompleteComponent extends AbstractTest {
@@ -17,7 +17,7 @@ public class TestAutocompleteComponent extends AbstractTest {
 	@FindBy(xpath="//input[@]")
 	private AutocompleteComponentImpl<String> cities;
 	
-//	@Test
+	@Test
 	public void testAreSuggestionsAvailable() {
 		
 	}

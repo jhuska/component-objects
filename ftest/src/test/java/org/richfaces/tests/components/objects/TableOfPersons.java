@@ -4,8 +4,8 @@ package org.richfaces.tests.components.objects;
 import java.util.List;
 
 import org.jboss.arquillian.graphene.spi.components.table.Row;
-import org.richfaces.tests.components.TableComponent6Impl;
 import org.richfaces.tests.components.objects.bean.Person;
+import org.richfaces.tests.components.table.TableComponent6Impl;
 
 public class TableOfPersons extends TableComponent6Impl<String, String, Integer, String, String, String> {
 

@@ -1,4 +1,4 @@
-package org.richfaces.tests.components;
+package org.richfaces.tests.components.calendar;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,10 +9,6 @@ import java.util.List;
 
 import org.jboss.arquillian.graphene.spi.annotations.Root;
 import org.jboss.arquillian.graphene.spi.components.calendar.CalendarPopupComponent;
-import org.jboss.arquillian.graphene.spi.components.calendar.CalendarPopupComponent.CalendarDay;
-import org.jboss.arquillian.graphene.spi.components.calendar.CalendarPopupComponent.CalendarMonth;
-import org.jboss.arquillian.graphene.spi.components.calendar.CalendarPopupComponent.CalendarWeek;
-import org.jboss.arquillian.graphene.spi.components.calendar.CalendarPopupComponent.CalendarYear;
 import org.jboss.arquillian.graphene.spi.components.common.AbstractComponent;
 import org.jboss.arquillian.graphene.spi.components.scrolling.ScrollingType;
 import org.joda.time.DateTime;

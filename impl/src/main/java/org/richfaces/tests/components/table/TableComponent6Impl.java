@@ -1,4 +1,4 @@
-package org.richfaces.tests.components;
+package org.richfaces.tests.components.table;
 
 import org.jboss.arquillian.graphene.spi.components.table.Column;
 import org.jboss.arquillian.graphene.spi.components.table.TableComponent6;
