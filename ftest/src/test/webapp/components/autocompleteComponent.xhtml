@@ -14,8 +14,15 @@
 		<ui:define name="body">
 			<h:form>
 				<rich:autocomplete mode="client" tokens=", "
-					autocompleteMethod="#{personBean.autocomplete}" id="autocomplete"
-					autofill="false"/>
+					autocompleteMethod="#{personBean.autocomplete}" id="autocomplete" autofill="true" selectFirst="true"/>
+
+				<ui:remove>
+					<rich:autocomplete mode="client" tokens=", "
+						autocompleteMethod="#{personBean.autocomplete}" id="autocomplete2"
+						autofill="false" />
+				</ui:remove>
+
+				<input type="button" value="Focus here!" id="focus" />
 			</h:form>
 		</ui:define>
 	</ui:composition>

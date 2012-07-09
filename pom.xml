@@ -25,8 +25,8 @@
 		<version.arquillian.graphene>2.0.0-SNAPSHOT</version.arquillian.graphene>
 
 		<version.selenium>2.0rc2</version.selenium>
-		<version.selenium.java>2.20.0</version.selenium.java>
-		<version.selenium.server>2.20.0</version.selenium.server>
+		<version.selenium.java>2.24.1</version.selenium.java>
+		<version.selenium.server>2.24.0</version.selenium.server>
 
 		<org.richfaces.bom.version>4.1.0.Final</org.richfaces.bom.version>
 
@@ -82,11 +82,6 @@
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-java</artifactId>
 				<version>${version.selenium.java}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.seleniumhq.selenium</groupId>
-				<artifactId>selenium-server</artifactId>
-				<version>${version.selenium.server}</version>
 			</dependency>
 
 			<!-- Arquillian Graphene -->

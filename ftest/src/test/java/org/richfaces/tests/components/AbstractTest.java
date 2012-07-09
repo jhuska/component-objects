@@ -1,9 +1,11 @@
 package org.richfaces.tests.components;
 
 import java.io.File;
+import java.net.URL;
 
 import org.apache.commons.lang.WordUtils;
 import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -11,14 +13,20 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverBackedSelenium;
 import org.testng.annotations.BeforeMethod;
+
+import com.thoughtworks.selenium.DefaultSelenium;
 
 public class AbstractTest extends Arquillian {
 
     @Drone
     protected WebDriver webDriver;
+    
+    @ArquillianResource
+    protected URL contextRoot;
 
-    private static final String WEBAPP_SRC = "src/test/webapp";
+    protected static final String WEBAPP_SRC = "src/test/webapp";
 
     protected static WebArchive createDeployment(Class<?> testClazz) {
         MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class)
@@ -46,7 +54,8 @@ public class AbstractTest extends Arquillian {
     
     @BeforeMethod
     public void loadTestPage() {
-        webDriver.get("http://localhost:8080/ftest-app/components/" + getAdditionToContextRoot() + ".jsf");
+        String URL = contextRoot.toExternalForm() + "components/" + getAdditionToContextRoot() + ".jsf";
+        webDriver.get(URL);
     }
 
     protected String getAdditionToContextRoot() {
