@@ -55,7 +55,7 @@ public class TestAutocompleteComponent extends AbstractTest {
     // Tests
     // ##################################################################################################################
 
-    // @Test
+    @Test
     public void testAreSuggestionsAvailable() {
         boolean result = autocompleteComponent.areSuggestionsAvailable();
         assertFalse(result, "Nothing was written into autocomplete input, therefore no suggestion should be available.");
@@ -71,22 +71,22 @@ public class TestAutocompleteComponent extends AbstractTest {
         assertTrue(result, "Suggestion should be available as there was input for which suggestions do exist");
     }
 
-    // @Test
+    @Test
     public void testClearByBackspace() {
-        clearInput(ClearType.BACKSPACE);
+        clearInput(ClearType.BACK_SPACE);
     }
 
-    // @Test
+    @Test
     public void testClearByDelete() {
         clearInput(ClearType.DELETE);
     }
 
-    // @Test
+    @Test
     public void testClearByEscapeSequence() {
         clearInput(ClearType.ESCAPE_SQ);
     }
 
-    // @Test
+    @Test
     public void testFinish() {
         String expected = "Br";
         inputToWrite.sendKeys(expected);
@@ -110,6 +110,40 @@ public class TestAutocompleteComponent extends AbstractTest {
         checkGetAllSuggestionsFor("Brn", expectedSuggForBrn);
     }
 
+    @Test
+    public void testType() {
+        String expected = "B";
+        autocompleteComponent.type(expected);
+
+        String actual = inputToWrite.getAttribute("value");
+        assertEquals(actual, expected, "The input value is different than what was type there!");
+
+        expected = "Br";
+        autocompleteComponent.type("r");
+
+        actual = inputToWrite.getAttribute("value");
+        assertEquals(actual, expected, "The input value is different than what was type there!");
+    }
+
+    @Test
+    public void testTypeWithParser() {
+        initExpectedSuggestionsLists();
+        String input = "B";
+        StringSuggestionParserImpl parser = new StringSuggestionParserImpl();
+
+        List<Suggestion<String>> suggestions = autocompleteComponent.type(input, parser);
+        assertEquals(inputToWrite.getAttribute("value"), input, "The value was not written into input correclty!");
+        assertTrue(suggestions.containsAll(expectedSuggForB), "Suggestions for input: " + input + " are wrong!");
+        assertEquals(suggestions.size(), expectedSuggForB.size(), "Retrieved suggestions has some redundant suggestions.");
+
+        input = "Br";
+        suggestions = autocompleteComponent.type("r", parser);
+        assertEquals(inputToWrite.getAttribute("value"), input, "The value was not written into input correclty!");
+        assertTrue(suggestions.containsAll(expectedSuggForBr), "Suggestions for input: " + input + " are wrong!");
+        assertEquals(suggestions.size(), expectedSuggForBr.size(), "Retrieved suggestions has some redundant suggestions.");
+
+    }
+
     // ##################################################################################################################
     // Help Methods
     // ##################################################################################################################
@@ -119,8 +153,7 @@ public class TestAutocompleteComponent extends AbstractTest {
         waitForSuggestions(2);
 
         List<Suggestion<String>> actualSuggestions = autocompleteComponent.getAllSuggestions(new StringSuggestionParserImpl());
-        System.out.println(actualSuggestions);
-        System.out.println();
+
         assertTrue(actualSuggestions.containsAll(expectedSugg), "Suggestions for input: " + input + " are wrong!");
         assertEquals(actualSuggestions.size(), expectedSugg.size(), "Retrieved suggestions has some redundant suggestions.");
         inputToWrite.clear();

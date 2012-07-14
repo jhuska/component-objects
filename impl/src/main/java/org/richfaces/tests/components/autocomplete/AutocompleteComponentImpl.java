@@ -1,6 +1,7 @@
 package org.richfaces.tests.components.autocomplete;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.jboss.arquillian.graphene.spi.annotations.Root;
@@ -11,8 +12,14 @@ import org.jboss.arquillian.graphene.spi.components.autocomplete.SuggestionParse
 import org.jboss.arquillian.graphene.spi.components.common.AbstractComponent;
 import org.jboss.arquillian.graphene.spi.components.scrolling.ScrollingType;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AutocompleteComponentImpl<T> extends AbstractComponent implements AutocompleteComponent<T> {
 
@@ -25,6 +32,8 @@ public class AutocompleteComponentImpl<T> extends AbstractComponent implements A
 
     @FindBy(css = CSS_INPUT)
     WebElement inputToWrite;
+
+    private String separator = " ";
 
     @Override
     public boolean areSuggestionsAvailable() {
@@ -71,8 +80,11 @@ public class AutocompleteComponentImpl<T> extends AbstractComponent implements A
         // check http://code.google.com/p/selenium/wiki/AdvancedUserInteractions
         // probably I will need instance for webdriver in AbstractComponent
 
-        if (clearType == ClearType.BACKSPACE) {
-            throw new UnsupportedOperationException("not implemented yet");
+        if (clearType == ClearType.BACK_SPACE) {
+            Actions builder = new Actions(webDriver);
+            
+            builder.keyDown(Keys.BACK_SPACE).keyUp(Keys.BACK_SPACE);
+            builder.build().perform();
         }
 
         if (clearType == ClearType.ESCAPE_SQ) {
@@ -123,13 +135,17 @@ public class AutocompleteComponentImpl<T> extends AbstractComponent implements A
 
     @Override
     public List<String> getInputValues() {
-        // TODO Auto-generated method stub
-        return null;
+        List<String> inputValues = new ArrayList<String>();
+
+        String currentInputValue = inputToWrite.getAttribute("value");
+        inputValues = Arrays.asList(currentInputValue.split(separator));
+        
+        return inputValues;
     }
 
     @Override
     public void setSeparator(String regex) {
-        // TODO Auto-generated method stub
+        this.separator = regex;
     }
 
     @Override
@@ -151,8 +167,39 @@ public class AutocompleteComponentImpl<T> extends AbstractComponent implements A
     }
 
     @Override
-    public List<Suggestion<T>> typeString(String string) {
-        return null;
+    public void type(String value) {
+        inputToWrite.sendKeys(value);
+        try {
+            waitForSuggestions(GUI_WAIT);
+        } catch (TimeoutException ex) {
+            // no suggestions available
+
+        }
+    }
+
+    @Override
+    public List<Suggestion<T>> type(String value, SuggestionParser<T> parser) {
+        List<Suggestion<T>> suggestions = new ArrayList<Suggestion<T>>();
+
+        inputToWrite.sendKeys(value);
+        try {
+            waitForSuggestions(GUI_WAIT);
+        } catch (TimeoutException ex) {
+            // no suggestions available
+            return suggestions;
+        }
+
+        suggestions = getAllSuggestions(parser);
+        return suggestions;
+    }
+
+    private void waitForSuggestions(int timeout) {
+        (new WebDriverWait(webDriver, timeout)).until(new ExpectedCondition<Boolean>() {
+
+            public Boolean apply(WebDriver d) {
+                return areSuggestionsAvailable();
+            }
+        });
     }
 
     @Override
@@ -166,5 +213,4 @@ public class AutocompleteComponentImpl<T> extends AbstractComponent implements A
         // TODO Auto-generated method stub
         return false;
     }
-
 }
