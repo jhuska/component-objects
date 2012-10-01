@@ -13,8 +13,8 @@
 
 		<ui:define name="body">
 			<h:form>
-				<rich:autocomplete mode="client" tokens=", "
-					autocompleteMethod="#{personBean.autocomplete}" id="autocomplete" autofill="true" selectFirst="true"/>
+				<rich:autocomplete mode="client" tokens=" "
+					autocompleteMethod="#{personBean.autocomplete}" id="autocomplete" autofill="true" selectFirst="false"/>
 
 				<ui:remove>
 					<rich:autocomplete mode="client" tokens=", "

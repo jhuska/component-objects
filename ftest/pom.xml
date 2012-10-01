@@ -4,18 +4,18 @@
 
 	<parent>
 		<groupId>org.richfaces.tests</groupId>
-		<artifactId>component-objects-richfaces-impl-parent</artifactId>
+		<artifactId>richfaces-page-fragments-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>component-objects-richfaces-ftest</artifactId>
+	<artifactId>richfaces-page-fragments-ftest</artifactId>
 
 	<dependencies>
 		<!-- Test dependencies -->
 		<dependency>
 			<groupId>org.richfaces.tests</groupId>
-			<artifactId>component-objects-richfaces-impl</artifactId>
+			<artifactId>richfaces-page-fragments-impl</artifactId>
 			<scope>test</scope>
 			<version>${project.version}</version>
 		</dependency>
